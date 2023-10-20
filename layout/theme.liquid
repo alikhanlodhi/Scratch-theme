@@ -1,8 +1,484 @@
-<html>
-<head>
-{{ content_for_header}}
-</head>
-<body>
-{{ content_for_layout }}
-</body>
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    
+    {%- if settings.animations_reveal_on_scroll -%}
+      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+      {% for scheme in settings.color_schemes -%}
+        {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
+        {% if forloop.index == 1 -%}
+          :root,
+        {%- endif %}
+        .color-{{ scheme.id }} {
+          --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        {% if scheme.settings.background_gradient != empty %}
+          --gradient-background: {{ scheme.settings.background_gradient }};
+        {% else %}
+          --gradient-background: {{ scheme.settings.background }};
+        {% endif %}
+        --color-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+        --color-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
+        --color-button: {{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }};
+        --color-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
+        --color-secondary-button: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        --color-secondary-button-text: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+        --color-link: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+        --color-badge-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+        --color-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        --color-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+        --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+      }
+      {% endfor %}
+
+      {{ scheme_classes | prepend: 'body' }} {
+        color: rgba(var(--color-foreground), 0.75);
+        background-color: rgb(var(--color-background));
+      }
+
+      :root {
+        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-style: {{ settings.type_body_font.style }};
+        --font-body-weight: {{ settings.type_body_font.weight }};
+        --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
+
+        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-heading-style: {{ settings.type_header_font.style }};
+        --font-heading-weight: {{ settings.type_header_font.weight }};
+
+        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+        --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
+
+        --media-padding: {{ settings.media_padding }}px;
+        --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
+        --media-border-width: {{ settings.media_border_thickness }}px;
+        --media-radius: {{ settings.media_radius }}px;
+        --media-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
+        --media-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
+        --media-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
+        --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
+        --media-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
+
+        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+        --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
+
+        --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
+        --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+        --product-card-text-alignment: {{ settings.card_text_alignment }};
+        --product-card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
+        --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+        --product-card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
+        --product-card-shadow-visible: {% if settings.card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --product-card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --product-card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --product-card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
+
+        --collection-card-image-padding: {{ settings.collection_card_image_padding | divided_by: 10.0 }}rem;
+        --collection-card-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
+        --collection-card-text-alignment: {{ settings.collection_card_text_alignment }};
+        --collection-card-border-width: {{ settings.collection_card_border_thickness | divided_by: 10.0 }}rem;
+        --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
+        --collection-card-shadow-opacity: {{ settings.collection_card_shadow_opacity | divided_by: 100.0 }};
+        --collection-card-shadow-visible: {% if settings.collection_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --collection-card-shadow-horizontal-offset: {{ settings.collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --collection-card-shadow-vertical-offset: {{ settings.collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --collection-card-shadow-blur-radius: {{ settings.collection_card_shadow_blur | divided_by: 10.0 }}rem;
+
+        --blog-card-image-padding: {{ settings.blog_card_image_padding | divided_by: 10.0 }}rem;
+        --blog-card-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
+        --blog-card-text-alignment: {{ settings.blog_card_text_alignment }};
+        --blog-card-border-width: {{ settings.blog_card_border_thickness | divided_by: 10.0 }}rem;
+        --blog-card-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
+        --blog-card-shadow-opacity: {{ settings.blog_card_shadow_opacity | divided_by: 100.0 }};
+        --blog-card-shadow-visible: {% if settings.blog_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --blog-card-shadow-horizontal-offset: {{ settings.blog_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+        --blog-card-shadow-vertical-offset: {{ settings.blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+        --blog-card-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
+
+        --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
+
+        --popup-border-width: {{ settings.popup_border_thickness }}px;
+        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
+        --popup-corner-radius: {{ settings.popup_corner_radius }}px;
+        --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
+        --popup-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
+        --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
+        --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+
+        --drawer-border-width: {{ settings.drawer_border_thickness }}px;
+        --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
+        --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
+        --drawer-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
+        --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
+        --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+
+        --spacing-sections-desktop: {{ settings.spacing_sections }}px;
+        --spacing-sections-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
+
+        --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
+        --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
+        --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
+        --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
+
+        --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
+        --text-boxes-border-width: {{ settings.text_boxes_border_thickness }}px;
+        --text-boxes-radius: {{ settings.text_boxes_radius }}px;
+        --text-boxes-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
+        --text-boxes-shadow-visible: {% if settings.text_boxes_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
+        --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
+        --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
+
+        --buttons-radius: {{ settings.buttons_radius }}px;
+        --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+        --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+        --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
+        --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
+        --buttons-shadow-visible: {% if settings.buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
+        --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
+        --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
+        --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
+        --buttons-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
+
+        --inputs-radius: {{ settings.inputs_radius }}px;
+        --inputs-border-width: {{ settings.inputs_border_thickness }}px;
+        --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+        --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
+        --inputs-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
+        --inputs-margin-offset: {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0 %}{{ settings.inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
+        --inputs-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
+        --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
+        --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
+
+        --variant-pills-radius: {{ settings.variant_pills_radius }}px;
+        --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
+        --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
+        --variant-pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
+        --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
+        --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
+        --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      html {
+        box-sizing: border-box;
+        font-size: calc(var(--font-body-scale) * 62.5%);
+        height: 100%;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: 100%;
+        min-height: 100%;
+        margin: 0;
+        font-size: 1.5rem;
+        letter-spacing: 0.06rem;
+        line-height: calc(1 + 0.8 / var(--font-body-scale));
+        font-family: var(--font-body-family);
+        font-style: var(--font-body-style);
+        font-weight: var(--font-body-weight);
+      }
+
+      @media screen and (min-width: 750px) {
+        body {
+          font-size: 1.6rem;
+        }
+      }
+
+
+    {% endstyle %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {%- unless settings.type_body_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
+    {%- unless settings.type_header_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
+
+    {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
+      <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.predictive_search_enabled -%}
+      <link
+        rel="stylesheet"
+        href="{{ 'component-predictive-search.css' | asset_url }}"
+        media="print"
+        onload="this.media='all'"
+      >
+    {%- endif -%}
+      <script src="{{ 'lottie-player.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
+    
+{{ 'bootstrap.min.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'custom_styles.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'custom.css' | asset_url | stylesheet_tag: preload: true }}
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer="defer"></script>  
+  </head>
+
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+    <div class="age-gate">
+      <div class="agecontent">
+        <div class="modal-body new-ageup text-center">
+          <h5>ONLY enter if you are 19+</h5>
+          <h2 class="desk-h2">Ghosts can be scary. This website is not for kids.</h2>
+          <h2 class="mob-h2">
+            Ghosts can be<br>
+            scary. This website<br>
+            is not for kids.
+          </h2>
+        </div>
+           <div class="modal-footer">
+             <button id="button-exit" onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ&amp;autoplay=1'" type="button" class="new-btn btn-secondary" data-dismiss="modal">
+            No, I'll leave
+          </button>
+        <button id="enterButton" class="agegatebtn new-btn btn-primary dsk-view">  <span class="new-mob-btn"><svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14.7455 15.3412C14.5727 14.9085 14.3758 14.4181 14.3758 13.9032V5.95318C14.3758 1.86416 10.8444 0 7.5602 0C4.11517 0 0.623922 2.04541 0.623922 5.95318V13.9032C0.623922 14.4181 0.428864 14.9085 0.256012 15.3412C0.0429484 15.8699 -0.138306 16.3243 0.14738 16.6964C0.364645 16.9797 0.74876 17.1345 1.2313 17.1345C1.70365 17.1345 2.20059 16.9839 2.62852 16.7102C2.83979 16.5734 3.14168 16.3927 3.35474 16.3927C3.42316 16.3927 3.60802 16.3927 3.86969 16.859C4.60971 18.1602 5.68764 18.3457 6.86639 17.3176C7.17968 17.0457 7.81767 17.0421 8.13337 17.3176C8.64052 17.7617 9.11106 17.9772 9.5732 17.9772C10.1842 17.9772 10.7075 17.6015 11.1301 16.859C11.3935 16.3927 11.5844 16.3927 11.6468 16.3927C11.8581 16.3927 12.1618 16.5734 12.3706 16.7102C12.7992 16.9839 13.2961 17.1345 13.7709 17.1345C14.2516 17.1345 14.6357 16.9797 14.853 16.6982C15.1381 16.3243 14.9568 15.8699 14.7455 15.3412Z" fill="white"></path>
+  <path d="M4.92642 5.14234C5.10347 5.26898 5.28712 5.38661 5.47138 5.50365C5.49719 5.51925 5.52239 5.53486 5.5476 5.55046C5.50859 5.61108 5.47018 5.6723 5.43237 5.73352C5.38975 5.80374 5.34714 5.87396 5.30633 5.94538C5.26432 6.0162 5.22411 6.08822 5.18689 6.16204C5.11247 6.31029 5.04405 6.46394 4.99844 6.63319C4.99724 6.63739 4.99784 6.64279 5.00024 6.64699C5.00504 6.65479 5.01584 6.65779 5.02365 6.65239C5.17309 6.55996 5.30093 6.45133 5.42216 6.3379C5.48278 6.28088 5.5404 6.22206 5.59622 6.16204C5.65263 6.10203 5.70785 6.04141 5.76307 5.98079C5.82128 5.91597 5.8789 5.85055 5.93592 5.78393L6.03315 5.84095C6.2228 5.95018 6.41246 6.05941 6.60932 6.15904C6.70775 6.20886 6.80738 6.25747 6.90881 6.30189C7.01024 6.3475 7.11347 6.39011 7.2209 6.42792C7.2215 6.42792 7.2221 6.42792 7.2221 6.42792C7.2227 6.42732 7.2227 6.42672 7.2227 6.42612C7.15368 6.3361 7.08106 6.25087 7.00544 6.16925C6.93102 6.08642 6.85359 6.0072 6.77557 5.92917C6.61952 5.77373 6.45627 5.62728 6.29302 5.48144L6.22881 5.42502C6.28102 5.3572 6.33204 5.28818 6.38065 5.21736C6.45147 5.11353 6.43227 4.97009 6.33324 4.88966C6.22881 4.80444 6.07456 4.82004 5.98933 4.92507C5.94252 4.98269 5.89811 5.04211 5.85429 5.10153C5.83509 5.08532 5.81648 5.06912 5.79728 5.05291C5.62863 4.91427 5.45938 4.77683 5.28412 4.64779C5.28352 4.64719 5.28172 4.64599 5.28112 4.64539C5.14428 4.54756 4.95342 4.57937 4.8556 4.71621C4.75777 4.85365 4.78958 5.04451 4.92642 5.14234Z" fill="#B93AC6"></path>
+  <path d="M10.3384 6.00168C10.1289 5.80122 9.90685 5.61937 9.68478 5.43752C9.68238 5.43572 9.68058 5.43392 9.67818 5.43272C9.81262 5.27907 9.94406 5.12362 10.0665 4.96037C10.1619 4.83193 10.1439 4.64948 10.0209 4.54325C9.89244 4.43222 9.69798 4.44662 9.58695 4.57566C9.45191 4.73231 9.32767 4.89676 9.20524 5.063C9.13862 5.01259 9.0726 4.96097 9.00478 4.91176C8.77371 4.74311 8.53904 4.57926 8.29416 4.43042C8.13872 4.33679 7.93286 4.3722 7.82002 4.51924C7.69819 4.67769 7.72819 4.90456 7.88664 5.02639C8.11411 5.20105 8.35178 5.36009 8.59305 5.51374C8.66267 5.55755 8.7329 5.60017 8.80312 5.64278C8.79411 5.65658 8.78451 5.66979 8.77551 5.68359C8.64947 5.87565 8.52763 6.07131 8.413 6.27237C8.35538 6.3726 8.30077 6.47523 8.24675 6.57906C8.19393 6.68289 8.14172 6.78792 8.0961 6.89775C8.0943 6.90316 8.0943 6.90856 8.09791 6.91396C8.10331 6.92116 8.11351 6.92356 8.12131 6.91816C8.21854 6.84974 8.30977 6.77592 8.3998 6.7021C8.48922 6.62767 8.57745 6.55145 8.66327 6.47403C8.83493 6.31858 8.99938 6.15713 9.15962 5.99268C9.18783 5.96387 9.21484 5.93446 9.24305 5.90566C9.27246 5.92246 9.30126 5.93987 9.33067 5.95667C9.58035 6.09771 9.83122 6.23816 10.0935 6.36119C10.2249 6.42241 10.3588 6.48003 10.4962 6.53224C10.6337 6.58446 10.7747 6.63187 10.9236 6.66788C10.9242 6.66788 10.9242 6.66788 10.9248 6.66788C10.9254 6.66728 10.9254 6.66668 10.9254 6.66608C10.8377 6.54065 10.7429 6.42661 10.6439 6.31738C10.5454 6.20575 10.4434 6.10191 10.3384 6.00168Z" fill="#B93AC6"></path>
+  <path d="M10.3458 8.33055C10.2305 8.37976 10.1141 8.42658 9.99825 8.46019C9.94124 8.47699 9.88122 8.4914 9.8338 8.4902C9.8236 8.489 9.8104 8.4902 9.8062 8.4866C9.805 8.486 9.8032 8.4854 9.802 8.4854L9.79959 8.48479L9.79479 8.48299L9.77499 8.47579L9.68916 8.44278C9.57093 8.39777 9.44729 8.35156 9.30385 8.33235C9.23242 8.32335 9.1544 8.31975 9.06678 8.34135L9.03377 8.35096L9.01756 8.35636L9.00076 8.36356L8.96775 8.37976L8.95934 8.38397C8.95694 8.38517 8.95214 8.38757 8.95514 8.38577C8.95694 8.38397 8.95874 8.38217 8.96114 8.38096C8.97915 8.37196 8.97075 8.37556 8.95454 8.37016C8.91913 8.36056 8.86572 8.33955 8.8135 8.31494L8.64725 8.23632C8.53262 8.18231 8.41078 8.12769 8.27634 8.08808C8.20972 8.06767 8.1389 8.05087 8.06508 8.04126C7.99125 8.03166 7.91323 8.02626 7.83281 8.03466C7.75238 8.04246 7.67016 8.06047 7.59153 8.09288L7.53332 8.11869L7.4781 8.1499C7.45949 8.1601 7.44329 8.1733 7.42588 8.18471L7.38507 8.21351C7.31125 8.26933 7.21582 8.31314 7.11319 8.34675C7.01056 8.38096 6.89953 8.40197 6.78669 8.41818C6.55983 8.44939 6.32335 8.44638 6.08808 8.42538C5.67636 8.38577 5.26764 8.28133 4.88052 8.12109C4.88652 8.11208 4.89253 8.10368 4.89793 8.09528C4.93334 8.04126 4.96455 7.98665 4.99456 7.93083C5.00956 7.90322 5.02397 7.87501 5.03777 7.84681C5.05217 7.818 5.06478 7.79159 5.07858 7.75858L5.08098 7.75318C5.08518 7.74357 5.08818 7.73337 5.09119 7.72317C5.12059 7.60673 5.05037 7.4885 4.93394 7.45909C4.8175 7.42968 4.69927 7.4999 4.66986 7.61574C4.66386 7.63854 4.65546 7.66735 4.64825 7.69316C4.64045 7.72017 4.63265 7.74657 4.62425 7.77298C4.60804 7.8264 4.59064 7.87921 4.57263 7.93023C4.55403 7.98124 4.53482 8.03226 4.51321 8.07847C4.50241 8.10128 4.49101 8.12409 4.4802 8.14389L4.4718 8.1595L4.4634 8.1721L4.455 8.18531L4.43459 8.21231C4.37817 8.28974 4.36257 8.36356 4.35176 8.43078C4.34216 8.4986 4.34156 8.56282 4.34396 8.62584C4.35056 8.75188 4.37157 8.87251 4.40458 8.99015C4.40638 8.99615 4.41118 9.00095 4.41778 9.00155C4.42679 9.00275 4.43519 8.99675 4.43639 8.98835V8.98775C4.4556 8.87011 4.4796 8.75308 4.51141 8.64444C4.52702 8.58983 4.54682 8.53821 4.56783 8.4914C4.58944 8.44578 4.61884 8.40677 4.63985 8.39477L4.64345 8.39237L4.64525 8.39117L4.64825 8.38877L4.67046 8.37016L4.68606 8.35696C5.10199 8.59343 5.56353 8.74827 6.04187 8.8161C6.30235 8.85331 6.56823 8.86231 6.83711 8.8341C6.97215 8.8197 7.10719 8.79449 7.24223 8.75188C7.37727 8.70926 7.51291 8.65225 7.64075 8.55922L7.66356 8.54301L7.67616 8.53401C7.68456 8.52861 7.69236 8.52081 7.70137 8.5166C7.71037 8.5118 7.71877 8.5064 7.72777 8.5016L7.75538 8.4896C7.79259 8.47459 7.83281 8.46319 7.87662 8.45779C7.96485 8.44698 8.06688 8.45599 8.17431 8.47879C8.28174 8.5016 8.39397 8.53641 8.51101 8.57482C8.56923 8.59403 8.62924 8.61443 8.69286 8.63364C8.75708 8.65285 8.8225 8.67325 8.91073 8.68286C8.92153 8.68406 8.93534 8.68406 8.94674 8.68466C8.95334 8.68466 8.95874 8.68526 8.96535 8.68466L8.98755 8.68286L9.00916 8.68045C9.01636 8.67985 9.02596 8.67685 9.03437 8.67505C9.05177 8.67085 9.06798 8.66665 9.08718 8.65585C9.09678 8.65104 9.10579 8.64624 9.11479 8.64084L9.12259 8.63604C9.12499 8.63424 9.12799 8.63184 9.13039 8.63004L9.1346 8.62644L9.14 8.62404L9.1514 8.61803C9.18381 8.60303 9.23303 8.59523 9.28524 8.59403C9.33806 8.59343 9.39507 8.59703 9.45329 8.60423C9.51151 8.61143 9.57093 8.62344 9.63214 8.63424L9.72697 8.65164L9.75218 8.65585L9.75878 8.65705L9.76839 8.65765L9.78699 8.65885C9.814 8.66125 9.8314 8.65585 9.85241 8.65285C9.92923 8.63604 9.98685 8.60543 10.0451 8.57422C10.1591 8.51 10.2623 8.43678 10.3602 8.35576C10.3656 8.35156 10.3674 8.34375 10.3644 8.33715C10.3632 8.33055 10.3536 8.32695 10.3458 8.33055Z" fill="#B93AC6"></path>
+</svg>
+</span>
+            <span class="new-mob-view">Let me in. I'm 19+</span></button>
+        </div>
+       <p class="new-bt-text">By entering this site you are agreeing to the Terms of Use and Privacy Policy.</p>
+      </div>
+    </div>
+      
+    <div class="content">
+{{ 'popup.css' | asset_url | stylesheet_tag }}
+      <script>
+       const enterButton = document.getElementById('enterButton');
+const ageGate = document.querySelector('.age-gate');
+const content = document.querySelector('.content');
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
+// Function to get a cookie by name
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
+
+// Check if a cookie is set
+const hasEntered = getCookie('hasEntered');
+
+// Event listener for the Enter button
+enterButton.addEventListener('click', () => {
+    ageGate.style.display = 'none';
+    content.style.display = 'block';
+
+    // Set a cookie to remember that the user has entered
+    setCookie('hasEntered', 'true', 30); // Cookie expires in 30 days
+});
+
+// If the user has previously entered (cookie is set), hide the age gate
+if (hasEntered === 'true') {
+    ageGate.style.display = 'none';
+    content.style.display = 'block';
+}
+
+      </script>
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+
+    {%- if settings.cart_type == 'drawer' -%}
+      {%- render 'cart-drawer' -%}
+    {%- endif -%}
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}',
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+      };
+
+      window.quickOrderListStrings = {
+        itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+        itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+        itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+        itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+        viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+        each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
+      };
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+        recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
+        recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {%- if settings.predictive_search_enabled -%}
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    </div>
+  </body>
+<script>
+  $(function(){$("#exampleModalLong").on("hidden.bs.modal",function(){document.querySelector("body").classList.remove("position-fixed")}),$("._modal .modal-dialog").wrap("<div class='wrap'></div>"),$("._modal").append("<button type='button' id='cross_btn' class='close' data-dismiss='modal' aria-label='Close'><span></span></button><div class='shape'><svg width='100%' height='100%' viewBox='0 0 1440 800' preserveAspectRatio='none'><path d='M-22.4 -87.7C-30.7,8.200000000000003,34.5,488.1,194.2,496c189.3,9.4,264.6 -232.7,431.3 -231c187.6,2,331.6,482.9,528.2,492c443.7,20.5,435.1 -828.5,368.6 -954.8C1455.9 -324.1,34.5 -746.7 -22.4 -87.7z'></path></svg></div>"),$(document).on("click","[data-toggle='modal']",function(){target=$(this).attr("data-target"),console.log(target),$("._modal[data-target='"+target+"']").animate({top:0},1500),setTimeout(function(){$("._modal[data-target='"+target+"']").addClass("active")},1500)}),$(document).on("click","button#cross_btn",function(){$(this).parent("._modal").animate({top:"-200vh"},1e3),setTimeout(function(){$("._modal").removeClass("active")},750)})});
+//# sourceMappingURL=/cdn/shop/t/42/assets/custom-animation.js.map?v=137530620705318240841683742439
+</script>
+  
+  <style>
+    .modal-backdrop{display:none!important}._modal{display:block!important;opacity:1!important;position:fixed;top:-200vh;left:0;right:0;height:200vh;-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0);transition:opacity .3s .1s,-webkit-transform .3s .1s;-webkit-transition:opacity .3s .1s,-webkit-transform .3s .1s;transition:transform .3s .1s,opacity .3s .1s;transition:transform .3s .1s,opacity .3s .1s,-webkit-transform .3s .1s;overflow:hidden}._modal>.wrap{position:absolute;top:0;left:0;width:100%;height:100vh;background:#fff;overflow-y:auto;z-index:2}._modal>.shape{position:relative;top:100vh;height:100vh;z-index:1}._modal>.shape svg{fill:#fff}._modal .modal-content{opacity:0;-webkit-transform:translateY(50px);-ms-transform:translateY(50px);transform:translateY(50px)}.modal.active .modal-content{opacity:1;-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0);transition:opacity .3s .1s,-webkit-transform .3s .1s;-webkit-transition:opacity .3s .1s,-webkit-transform .3s .1s;transition:transform .3s .1s,opacity .3s .1s;transition:transform .3s .1s,opacity .3s .1s,-webkit-transform .3s .1s}button#cross_btn{width:30px;height:30px;background:#B93AC9;border-radius:75%;position:fixed;top:10px;right:10px;z-index:3;padding:0;border:0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}button#cross_btn>span{position:absolute;left:0;top:0;width:100%;height:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}button#cross_btn>span:before,button#cross_btn>span:after{position:absolute;content:"";width:14px;height:2px;background:#fff}button#cross_btn>span:before{-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}button#cross_btn>span:after{-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg)}
+/*# sourceMappingURL=/cdn/shop/t/42/assets/custom-animation.css.map?v=43377369012958601941680209620 */
+  </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to handle mobile toggling
+  function toggleMobile() {
+    var toggleMobileButton = document.getElementById("toggle-mobile");
+    var navigationMobile = document.getElementById("navigation-mobile");
+
+    if (!toggleMobileButton.classList.contains("active")) {
+      toggleMobileButton.classList.add("active");
+      navigationMobile.style.top = "0";
+      setTimeout(function () {
+        navigationMobile.classList.add("active");
+      }, 800);
+    } else {
+      toggleMobileButton.classList.remove("active");
+      navigationMobile.style.top = "-200vh";
+      setTimeout(function () {
+        navigationMobile.classList.remove("active");
+      }, 750);
+    }
+  }
+
+  // Function to handle desktop toggling
+  function toggleDesktop() {
+    var toggleDesktopButton = document.getElementById("toggle-desktop");
+    var navigationDesktop = document.getElementById("navigation-desktop");
+
+    if (!toggleDesktopButton.classList.contains("active")) {
+      toggleDesktopButton.classList.add("active");
+      navigationDesktop.style.top = "0";
+      setTimeout(function () {
+        navigationDesktop.classList.add("active");
+      }, 800);
+    } else {
+      toggleDesktopButton.classList.remove("active");
+      navigationDesktop.style.top = "-200vh";
+      setTimeout(function () {
+        navigationDesktop.classList.remove("active");
+      }, 750);
+    }
+  }
+
+  // Attach event listeners
+  document.getElementById("toggle-mobile").addEventListener("click", toggleMobile);
+  document.getElementById("toggle-desktop").addEventListener("click", toggleDesktop);
+});
+</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/owl.carousel2.thumbs@0.1.8/dist/owl.carousel2.thumbs.min.js"></script>
+
+
 </html>
