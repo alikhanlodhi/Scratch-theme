@@ -1,0 +1,307 @@
+<div class=" new-product-item">
+  
+  <div class="t-box card-items">
+    
+      {% if card_product.metafields.custom.label != blank %}
+        <div class="custom-badge">
+          <span class="meta-badge">{{ card_product.metafields.custom.label}} </span>
+        </div>
+      {% endif %}
+      
+
+      
+        <div class="custom-badge pink-badge">
+          <span class="meta-badge">
+            See formats 
+            <span class="pl-2"> <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4C0 3.84848 0.079009 3.70316 0.219646 3.59601C0.360282 3.48887 0.551026 3.42867 0.749916 3.42867H9.43845L6.21831 0.976546C6.07749 0.869266 5.99838 0.723764 5.99838 0.572047C5.99838 0.420331 6.07749 0.274829 6.21831 0.167549C6.35912 0.0602692 6.55011 0 6.74925 0C6.94839 0 7.13937 0.0602692 7.28019 0.167549L11.7797 3.5955C11.8495 3.64857 11.9049 3.71162 11.9427 3.78103C11.9805 3.85044 12 3.92485 12 4C12 4.07515 11.9805 4.14956 11.9427 4.21897C11.9049 4.28838 11.8495 4.35143 11.7797 4.4045L7.28019 7.83245C7.13937 7.93973 6.94839 8 6.74925 8C6.55011 8 6.35912 7.93973 6.21831 7.83245C6.07749 7.72517 5.99838 7.57967 5.99838 7.42795C5.99838 7.27624 6.07749 7.13073 6.21831 7.02345L9.43845 4.57133H0.749916C0.551026 4.57133 0.360282 4.51113 0.219646 4.40399C0.079009 4.29684 0 4.15153 0 4Z" fill="white"></path>
+              </svg>
+            </span>
+          </span>
+        </div>
+      
+
+    <a href="{{ card_product.url }}" class="position-absolute w-100 h-100 product-card-url"></a>
+      <div class="badge-outer">
+        
+          <div class="reveal">
+            <img srcset="
+                  {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                  {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                  {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
+                "
+                src="{{ card_product.featured_media | image_url: width: 533 }}" alt="Gelonade" class="w-100" loading="lazy" width="" height="">
+            <img class="hidden"  srcset="
+                    {%- if card_product.media[1].width >= 165 -%}{{ card_product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if card_product.media[1].width >= 360 -%}{{ card_product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if card_product.media[1].width >= 533 -%}{{ card_product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
+                    {%- if card_product.media[1].width >= 720 -%}{{ card_product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
+                    {%- if card_product.media[1].width >= 940 -%}{{ card_product.media[1] | image_url: width: 940 }} 940w,{%- endif -%}
+                    {%- if card_product.media[1].width >= 1066 -%}{{ card_product.media[1] | image_url: width: 1066 }} 1066w,{%- endif -%}
+                    {{ card_product.media[1] | image_url }} {{ card_product.media[1].width }}w
+                  "
+                  src="{{ card_product.media[1] | image_url: width: 533 }}" alt="Gelonade" loading="lazy" width="" height="">
+          </div>
+        
+      </div>
+
+    <ul class="clearfix product-card-details">
+      <li>
+        <a href="{{ card_product.url }}">
+          <span class="product-title"> {{ card_product.title | escape }}</span>
+        </a>
+      </li>
+      <li>
+        
+          <span class="product-thc-terpene">
+            THC: {{ card_product.metafields.custom.thc }} <span class="product-text-divider">&nbsp;/&nbsp;</span> Terpene: {{ card_product.metafields.custom.terpene }}
+          </span>
+        
+      </li>
+      <li>
+        <span class="product-weight">
+          {{ card_product.price | money_with_currency }}
+          
+ <span class="product-text-divider"> / </span> {{ card_product.metafields.custom.pricepergram }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<style>
+  /* Ibrawork */
+
+.new-product-item {
+  max-width: 310px;
+  width: 100%;
+  cursor: pointer;
+}
+.recommended-products .new-product-item {
+  width: 374px;
+}
+
+.new-product-item .card-items {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  border-radius: 50px;
+  border: 2px solid #ffffff;
+  transition: transform .3s ease-in-out;
+  /* transform: scale(1.05); */
+}
+.new-product-item .card-items:hover {
+  /* transition: transform .5s ease-in-out; */
+  transform: scale(1.04);
+  /* border: 1px solid #ffffff; */
+  box-shadow: 2px 5px 25px #ffffff59;
+  /* border-radius: 46px; */
+}
+.new-product-item img.w-100,
+.new-product-item img.hidden {
+  border-radius: 47px 47px 0 0;
+  /* width: 374px !important; */
+  height: 410px;
+  object-fit: cover;
+}
+/* .new-product-item img.w-100:hover,
+.new-product-item img.hidden:hover {
+  background: #d9d9d9;
+} */
+.new-product-item .custom-badge {
+  position: absolute;
+  /* width: 125px; */
+  height: 30px;
+  background: #000000;
+  border-radius: 0 50px 50px 0;
+  top: 45px;
+  z-index: 3;/*this z-index is greater than second image on hover product card*/
+  left: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 10px 10px 20px;
+}
+.custom-badge.plp_sold_out span span {
+  font-size: 12px;
+  margin-left: 5px;
+}
+.new-product-item span.meta-badge {
+    /* position: absolute; */
+    font-family: "RBNo3.1 W00 Book";
+    font-size: 16px;
+    line-height: 100%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* top: 50%; */
+    /* right: 8%; */
+    /* transform: translateY(-50%); */
+    z-index: 1;
+}
+
+.new-product-item .pink-badge {
+  width: unset;
+  top: 368px;
+  right: 0;
+  left: unset;
+  background: #B93AC9;
+  border-radius: 50px 0 0 50px;
+  opacity: 0;
+  /* white-space: nowrap; */
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  /* padding: 10px 10px 10px 20px; */
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.new-product-item .pink-badge .meta-badge {
+  width: auto;
+}
+.new-product-item .card-items:hover .pink-badge {
+  opacity: 1;
+}
+
+.new-product-item span.product-title {
+  font-family: "RBNo3.1 W00 Extrabold";
+  font-style: normal;
+  font-weight: 450;
+  font-size: 30px;
+  line-height: 96%;
+  color: #ffffff;
+}
+.new-product-item .product-card-details {
+  margin: 24px 27px 20px;
+}
+.new-product-item ul.pricing li:first-child {
+  margin: 0;
+}
+.new-product-item span.product-thc-terpene {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 96%;
+  color: #B93AC9;
+  padding-top: 15px;
+  display: flex;
+}
+.new-product-item span.product-weight {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 96%;
+  color: #ffffff;
+  display: flex;
+  padding-top: 11px;
+}
+
+.new-product-item span.product-text-divider {
+  color: #fff;
+  padding: 0 7px;
+}
+
+.new-product-item .t-box:hover span:not(.product-thc-terpene) {
+  color: #fff !important;
+}
+
+/* ######### */
+
+.new-product-item .reveal .hidden {
+  display: block !important;
+  visibility: visible !important;
+}
+.new-product-item .product:hover .reveal img {
+  opacity: 1;
+}
+.new-product-item .reveal {
+  position: relative;
+}
+.new-product-item .reveal .hidden {
+  background: #000000;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+}
+.new-product-item .card-items:hover .reveal .hidden {
+  z-index: 2;
+  opacity: 1;
+}
+
+.new-product-item .product-card-url {
+  z-index: 1;
+}
+.new-product-item .product-card-url:hover{
+  z-index: 999;
+}
+/* Media Query */
+
+@media screen and (max-width: 1024px) {
+  .new-product-item span.product-title {
+    font-size: 24px;
+  }
+  .new-product-item span.product-thc-terpene {
+    font-size: 15px !important;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .new-product-item img.w-100,
+  .new-product-item img.hidden {
+    height: 332px;
+  }
+  .new-product-item .pink-badge {
+    top: 310px;
+  }
+  /* .new-product-item .card-items:hover {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.01);
+    background: #000000;
+    border: 1px solid #ffffff;
+    box-shadow: 0px 8px 35px rgba(255, 255, 255, 0.25);
+    border-radius: 46px;
+  } */
+}
+
+@media (min-width: 768px) {
+  .new-product-item {
+    max-width: 374px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .new-product-item img.w-100, .new-product-item img.hidden {
+    max-height: 397.75px;
+    object-fit: cover;
+  }
+  .new-product-item span.product-thc-terpene {
+    font-size: 18px;
+  }
+  .new-product-item span.product-weight { 
+    font-size: 20px;
+    padding-top: 13px;
+  }
+  .new-product-item .product-card-details {
+    margin: 27px 31px 30px;
+  }
+}
+
+
+
+</style>

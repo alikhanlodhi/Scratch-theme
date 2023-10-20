@@ -1,0 +1,68 @@
+ <div id="slider-container">
+        <div id="slider">
+{% for image in product.images %}
+          <div class="slider-item"><img src="{{ image | img_url: '' }}"></div>
+{% endfor %}
+        </div>
+    </div>
+    <div id="prev">&#8249;</div>
+    <div id="next">&#8250;</div>
+{{ 'media-slider.css' | asset_url | stylesheet_tag }}
+<script>
+       const slider = document.getElementById("slider");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+        const slideWidth = document.querySelector(".slider-item").clientWidth;
+        let currentIndex = 0;
+
+        function slideNext() {
+            if (currentIndex < slider.children.length - 1) {
+                currentIndex++;
+                updateSliderPosition();
+            }
+        }
+
+        function slidePrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSliderPosition();
+            }
+        }
+
+        function updateSliderPosition() {
+            slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        }
+
+        prevButton.addEventListener("click", slidePrev);
+        nextButton.addEventListener("click", slideNext);
+   
+</script>
+<style>
+          #slider-container {
+            width: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slider-item {
+            flex: 0 0 300px;
+            height: 500px;
+        }
+  .slider-item img {
+    width:500;
+    height:500;
+  }
+
+        #prev, #next {
+            cursor: pointer;
+            font-size: 24px;
+            margin-top: 100px;
+            user-select: none;
+          color:white;
+        }
+</style>

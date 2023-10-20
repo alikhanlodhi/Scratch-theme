@@ -1,0 +1,81 @@
+{{ 'custom_home_banner.css' | asset_url | stylesheet_tag: preload: true }}
+<section class="shopify-section  homepage_hero_v2_section dark-bg">
+  <div class="homepage_hero_v2_container page-width">
+    <div class="homepage_hero_v2_wrapper">
+      <div class="homepage_hero_v2_inner">
+        <div class="homepage_hero_v2_text_content_wrapper">
+          <span class="hero_paint_drips">
+            {% if section.settings.textbackground %}
+          {% include 'spray' %}
+              {% endif %}
+          </span>
+          <h1 class="homepage_hero_v2_heading">{{ section.settings.home_heading }}</h1>
+          <span class="mom_is_back">
+            {% if section.settings.momisback %}
+            {%  include 'mom_is_back' %}}
+            {% endif %}
+          </span>
+              
+          <!-- <p class="homepage_hero_v2_subheading">Ghost Drops is going back to its roots. In addition to dropping new products via our retail partners, we are now offering exclusive drops that can’t be found in your local dispensary.</p> -->
+          <span class="flying_heart">
+            <img src="{{ 'flying-heart.svg' | asset_url }}" alt="flying heart design" class="flying_heart_img" loading="lazy">
+          </span>
+          {% if section.settings.button %}
+          <div class="homepage_hero_v2_button_wrapper">
+            
+            <a class="homepage_hero_v2_btn ghost_btn" href="/collections/shop-all">
+              <span class="cta_btn_icon"> {%  include 'cta_icon' %}} </span>
+              <span class="cta_btn_label">Shop Now</span>
+            </a>
+          </div>
+            {% endif %}
+        </div>
+        <div class="homepage_hero_v2_animation_content_wrapper">
+          {{ section.settings.playercode }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Custom Home Banner",
+    "settings": [
+         {
+           "type":"textarea",
+           "label":"Lottie Player code",
+           "id":"playercode"
+   
+         },
+      {
+         "type": "text",
+  "id": "home_heading",
+  "label": "Heading"
+   },
+      {
+  "type": "checkbox",
+  "id": "textbackground",
+  "label": "Text Overlap Image",
+         "default":true
+  
+},
+    {
+  "type": "checkbox",
+  "id": "momisback",
+  "label": "Mom is back",
+      "default":true
+},
+        {
+  "type": "checkbox",
+  "id": "button",
+  "label": "Enable Button",
+      "default":true
+}
+    ],
+    	"presets": [
+    {
+      "name": "Custom Home Banner"
+      }
+  ]
+  }
+{% endschema %}

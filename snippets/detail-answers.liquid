@@ -1,0 +1,144 @@
+    {{ 'answers.css' | asset_url | stylesheet_tag }}
+    <div class="frequent">
+     
+      <div class="gradient_separator separator_1"></div>
+      <button class="accordion">
+        <span class="main_text">
+          <h4 class="accordion_title">Strain spec</h4>
+        </span>
+        <span id="accordion_caret_icon" class="accordion_caret_icon">
+          <i>
+            <svg width="16" height="27" viewBox="0 0 16 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.01963 25.9862C0.67321 25.6436 0.5 25.238 0.5 24.7694C0.5 24.3017 0.67321 23.8966 1.01963 23.554L11.1697 13.5171L0.984988 3.44598C0.661663 3.12626 0.5 2.72661 0.5 2.24704C0.5 1.76746 0.67321 1.35639 1.01963 1.01383C1.36605 0.671278 1.77621 0.5 2.25012 0.5C2.72309 0.5 3.13279 0.671278 3.47921 1.01383L15.1189 12.558C15.2575 12.695 15.3559 12.8434 15.4141 13.0033C15.4714 13.1632 15.5 13.3344 15.5 13.5171C15.5 13.6998 15.4714 13.8711 15.4141 14.031C15.3559 14.1908 15.2575 14.3393 15.1189 14.4763L3.44457 26.0204C3.12125 26.3401 2.72309 26.5 2.25012 26.5C1.77621 26.5 1.36605 26.3287 1.01963 25.9862Z" fill="#E81F76"></path>
+            </svg>
+          </i>
+        </span>
+      </button>
+      <div class="panel active">
+        <div class="straincontent">
+          <div class="strainbox">
+            <h4 class="accordion_title">Plant</h4>
+            <h5 class="accordion_title">{{ product.metafields.custom.plant }}</h5>
+          </div>
+          <div class="strainbox">
+            <h4 class="accordion_title">THC</h4>
+            <h5 class="accordion_title">{{ product.metafields.custom.thc }}</h5>
+          </div>
+          <div class="strainbox">
+            <h4 class="accordion_title">CBD</h4>
+            <h5 class="accordion_title">{{ product.metafields.custom.cbd }}</h5>
+          </div>
+          <div class="strainbox">
+            <h4 class="accordion_title">Terpene</h4>
+            <h5 class="accordion_title">{{ product.metafields.custom.terpene }}</h5>
+          </div>
+        </div>
+      </div>
+      <button class="accordion">
+        <span>
+          <h4 class="accordion_title">Description</h4>
+        </span>
+        <span id="accordion_caret_icon" class="accordion_caret_icon">
+          <i>
+            <svg width="16" height="27" viewBox="0 0 16 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.01963 25.9862C0.67321 25.6436 0.5 25.238 0.5 24.7694C0.5 24.3017 0.67321 23.8966 1.01963 23.554L11.1697 13.5171L0.984988 3.44598C0.661663 3.12626 0.5 2.72661 0.5 2.24704C0.5 1.76746 0.67321 1.35639 1.01963 1.01383C1.36605 0.671278 1.77621 0.5 2.25012 0.5C2.72309 0.5 3.13279 0.671278 3.47921 1.01383L15.1189 12.558C15.2575 12.695 15.3559 12.8434 15.4141 13.0033C15.4714 13.1632 15.5 13.3344 15.5 13.5171C15.5 13.6998 15.4714 13.8711 15.4141 14.031C15.3559 14.1908 15.2575 14.3393 15.1189 14.4763L3.44457 26.0204C3.12125 26.3401 2.72309 26.5 2.25012 26.5C1.77621 26.5 1.36605 26.3287 1.01963 25.9862Z" fill="#E81F76"></path>
+            </svg>
+          </i>
+        </span>
+      </button>
+      <div class="panel active">
+        <p>{{ product.metafields.custom.description }}</p>
+      </div>
+      <button class="accordion">
+        <span class="main_text">
+          <h4 class="accordion_title">Lineage</h4>
+        </span>
+        <span id="accordion_caret_icon" class="accordion_caret_icon">
+          <i>
+            <svg width="16" height="27" viewBox="0 0 16 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.01963 25.9862C0.67321 25.6436 0.5 25.238 0.5 24.7694C0.5 24.3017 0.67321 23.8966 1.01963 23.554L11.1697 13.5171L0.984988 3.44598C0.661663 3.12626 0.5 2.72661 0.5 2.24704C0.5 1.76746 0.67321 1.35639 1.01963 1.01383C1.36605 0.671278 1.77621 0.5 2.25012 0.5C2.72309 0.5 3.13279 0.671278 3.47921 1.01383L15.1189 12.558C15.2575 12.695 15.3559 12.8434 15.4141 13.0033C15.4714 13.1632 15.5 13.3344 15.5 13.5171C15.5 13.6998 15.4714 13.8711 15.4141 14.031C15.3559 14.1908 15.2575 14.3393 15.1189 14.4763L3.44457 26.0204C3.12125 26.3401 2.72309 26.5 2.25012 26.5C1.77621 26.5 1.36605 26.3287 1.01963 25.9862Z" fill="#E81F76"></path>
+            </svg>
+          </i>
+        </span>
+      </button>
+      <div class="panel active">
+        <div class="lineage_flowchart_wrapper">
+          <ul class="lineage_flowchart">
+            <li>
+              <div class="f-child">{{ product.metafields.custom.lineageparrent }}</div>
+              <ul class="branch-one clearfix">
+                <li>
+                  <div class="f-sub-child-one has-no-child">{{ product.metafields.custom.lineagechlid1 }}</div>
+                </li>
+                <li>
+                  <div class="f-sub-child-two has-no-child">{{ product.metafields.custom.lineagechild2 }}</div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button class="accordion">
+        <span class="main_text">
+          <h4 class="accordion_title">Dominant Terpenes</h4>
+        </span>
+        <span id="accordion_caret_icon" class="accordion_caret_icon">
+          <i>
+            <svg width="16" height="27" viewBox="0 0 16 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.01963 25.9862C0.67321 25.6436 0.5 25.238 0.5 24.7694C0.5 24.3017 0.67321 23.8966 1.01963 23.554L11.1697 13.5171L0.984988 3.44598C0.661663 3.12626 0.5 2.72661 0.5 2.24704C0.5 1.76746 0.67321 1.35639 1.01963 1.01383C1.36605 0.671278 1.77621 0.5 2.25012 0.5C2.72309 0.5 3.13279 0.671278 3.47921 1.01383L15.1189 12.558C15.2575 12.695 15.3559 12.8434 15.4141 13.0033C15.4714 13.1632 15.5 13.3344 15.5 13.5171C15.5 13.6998 15.4714 13.8711 15.4141 14.031C15.3559 14.1908 15.2575 14.3393 15.1189 14.4763L3.44457 26.0204C3.12125 26.3401 2.72309 26.5 2.25012 26.5C1.77621 26.5 1.36605 26.3287 1.01963 25.9862Z" fill="#E81F76"></path>
+            </svg>
+          </i>
+        </span>
+      </button>
+      <div class="panel active">
+        <p>{{ product.metafields.custom.dominantterpenes }}</p>
+      </div>
+      <button class="accordion">
+        <span class="main_text">
+          <h4 class="accordion_title">Appearance, Smell & Taste</h4>
+        </span>
+        <span id="accordion_caret_icon" class="accordion_caret_icon">
+          <i>
+            <svg width="16" height="27" viewBox="0 0 16 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.01963 25.9862C0.67321 25.6436 0.5 25.238 0.5 24.7694C0.5 24.3017 0.67321 23.8966 1.01963 23.554L11.1697 13.5171L0.984988 3.44598C0.661663 3.12626 0.5 2.72661 0.5 2.24704C0.5 1.76746 0.67321 1.35639 1.01963 1.01383C1.36605 0.671278 1.77621 0.5 2.25012 0.5C2.72309 0.5 3.13279 0.671278 3.47921 1.01383L15.1189 12.558C15.2575 12.695 15.3559 12.8434 15.4141 13.0033C15.4714 13.1632 15.5 13.3344 15.5 13.5171C15.5 13.6998 15.4714 13.8711 15.4141 14.031C15.3559 14.1908 15.2575 14.3393 15.1189 14.4763L3.44457 26.0204C3.12125 26.3401 2.72309 26.5 2.25012 26.5C1.77621 26.5 1.36605 26.3287 1.01963 25.9862Z" fill="#E81F76"></path>
+            </svg>
+          </i>
+        </span>
+      </button>
+      <div class="panel active">
+        <p>{{ product.metafields.custom.appearance }}</p>
+      </div>
+      <div class="gradient_separator separator_1"></div>
+      <button class="accordion">
+        <span class="main_text">
+          <h4 class="accordion_title">Shipping &amp; Delivery</h4>
+        </span>
+        <span id="accordion_caret_icon" class="accordion_caret_icon">
+          <i>
+            <svg width="16" height="27" viewBox="0 0 16 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.01963 25.9862C0.67321 25.6436 0.5 25.238 0.5 24.7694C0.5 24.3017 0.67321 23.8966 1.01963 23.554L11.1697 13.5171L0.984988 3.44598C0.661663 3.12626 0.5 2.72661 0.5 2.24704C0.5 1.76746 0.67321 1.35639 1.01963 1.01383C1.36605 0.671278 1.77621 0.5 2.25012 0.5C2.72309 0.5 3.13279 0.671278 3.47921 1.01383L15.1189 12.558C15.2575 12.695 15.3559 12.8434 15.4141 13.0033C15.4714 13.1632 15.5 13.3344 15.5 13.5171C15.5 13.6998 15.4714 13.8711 15.4141 14.031C15.3559 14.1908 15.2575 14.3393 15.1189 14.4763L3.44457 26.0204C3.12125 26.3401 2.72309 26.5 2.25012 26.5C1.77621 26.5 1.36605 26.3287 1.01963 25.9862Z" fill="#E81F76"></path>
+            </svg>
+          </i>
+        </span>
+      </button>
+      <div class="panel active">
+        <p>
+          <span>If your order is placed before 2 P.M. EST on a business day, it is shipped out the same day the order was placed. If your order is placed after 2 P.M. EST, your order will be shipped out next business day. No shipping during holidays or weekends.</span>
+        </p>
+      </div>
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active")
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        }
+      </script>
+    </div>

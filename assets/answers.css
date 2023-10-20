@@ -1,0 +1,142 @@
+.boxinfo {
+  font-size:16px;
+  
+}
+.accordion {
+    display: flex;
+    gap: 1em;
+    width: 48em;
+    background-color: black;
+    border: none;
+    font-size: 20px;
+
+    width:100%;
+    
+    display:flex;
+    place-content: space-between;
+   
+    color:white;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+    color: white;
+      
+}
+
+.accordion svg {
+    margin-top: 1em;
+}
+.frequent {
+    justify-content: center;
+    place-content: center;
+   text-align: center;
+}
+.active, .accordion:hover {
+    background-color: #ccc;
+  border:0px;
+  }
+  .panel {
+    padding: 0 18px;
+    background-color:black;
+    display: none;
+    color: white;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    margin-top:1em;
+  }
+  .panel {
+    font-size: 15px;
+    
+  }
+  button {
+    background-color: black;
+  }
+  .accordion:hover{
+    background-color: black;
+  }
+  .gradient_separator.separator_1 {
+    margin-top: 40px;
+    background: linear-gradient(90deg, #B93AC6 0%, #B93AC6 50.52%, #63D1F4 100%);
+    height: 3px;
+}
+.straincontent {
+    display:flex;
+    justify-content:center;
+    gap: 1em;
+    text-align: center;
+  }
+  .strainbox {
+ position: relative;
+  width: 130px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 21.2435px;
+  padding: 14.87px 12.75px 22.94px;
+  box-shadow: 0px 0px 60px rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent !important;
+  border-radius: 24.1573px;
+  background: linear-gradient(#181818, #181818) padding-box, linear-gradient(to bottom, #B93AC6, #B93AC6, #63D1F4) border-box;
+}
+.active, .accordion:hover {
+    background-color: #000;
+}
+.branch-one {
+    display: flex;
+    gap: 4em;
+  } 
+  ul {
+    list-style: none;
+    justify-content: center;
+  }
+  
+    .f-child {
+      background: #e31a77;
+      position: relative;
+      margin: 0 auto;
+      font-size: 12px;
+      max-width: 170px;
+      text-align: center;
+      padding: 10px 0px;
+      color: #fff;
+      font-weight: 600;
+      justify-content: center;
+      
+  }
+  .f-child:after {
+      position: absolute;
+      content: "";
+      width: 2px;
+      height: 70px;
+      background: #e31a77;
+      bottom: -65px;
+      left: 0px;
+      right: 0px;
+      margin: 0 auto;
+  }
+  .lineage_flowchart_wrapper{width:100%}.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-two,.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-one,.lineage_flowchart_wrapper .lineage_flowchart .second-sub-child-one,.lineage_flowchart_wrapper .lineage_flowchart .second-sub-child-two{padding:10px;text-align:center;font-size:12px;border:2px solid #e31a77;color:#fff;font-weight:700;max-width:100%;margin:0 auto;position:relative;width:170px}.lineage_flowchart_wrapper .lineage_flowchart ul.branch-one{max-width:330px;margin:42px auto 15px}.lineage_flowchart_wrapper .lineage_flowchart ul.branch-two{margin-top:40px;width:100%;margin-left:0}.lineage_flowchart_wrapper .lineage_flowchart ul.branch-two li{padding:0;width:50%}.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-one:after{content:"";position:absolute;right:-57px;top:50%;width:56px;height:2px;background:#e31a77}.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-two:before{position:absolute;content:"";width:2px;height:63px;background:#e31a77;bottom:-63px;left:0;right:0%;margin:0 auto}.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-one.has-no-child:before{display:none;content:""}.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-two.has-no-child:before{display:none;content:""}.lineage_flowchart_wrapper .lineage_flowchart .f-sub-child-two:after{content:"";position:absolute;left:-25px;top:50%;width:25px;height:2px;background:#e31a77}.lineage_flowchart_wrapper .lineage_flowchart .second-sub-child-one:before{position:absolute;content:"";right:-15px;height:2px;top:20px;width:15px;background:#B93AC9}.lineage_flowchart_wrapper .lineage_flowchart .second-sub-child-two:before{content:"";position:absolute;left:-14px;top:50%;width:14px;height:2px;background:#e31a77}.lineage_flowchart_wrapper .lineage_flowchart ul.marg-manage.branch-two .second-sub-child-one:before{content:"";position:absolute;right:-13px;top:50%;width:13px;height:2px;background:#e31a77}
+
+  
+  .lineage_flowchart_wrapper .lineage_flowchart ul.branch-one {
+   margin: 45px auto;
+    justify-content: center;
+    margin-left: 10em;
+    
+  }
+  body {
+    background-color: #000;
+  }
+.accordion_title {
+  color:white;
+  font-size:23px !important;
+  margin-bottom:16px !important;
+  white-space: nowrap;
+}
+button:focus {
+  outline:0px !important; 
+}

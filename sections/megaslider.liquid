@@ -1,0 +1,430 @@
+{{ 'mega_slider.css' | asset_url | stylesheet_tag: preload: true }}
+<section class="shopify-section homepage_mega_slider_v2_section">
+  <div class="homepage_mega_slider_v2_container">
+    <div class="homepage_mega_slider_v2_wrapper">
+      <div class="homepage_mega_slider_v2_inner">
+        <div class="homepage_mega_slider_v2_slider">
+          <swiper-slider class="homepage_mega_slider" data-lottie-player="false" data-swiperparams="{&quot;direction&quot;:&quot;horizontal&quot;,&quot;freeMode&quot;:{&quot;enabled&quot;:false},&quot;slidesPerView&quot;:1,&quot;autoplay&quot;:{&quot;delay&quot;:3000},&quot;loop&quot;:true,&quot;speed&quot;:300,&quot;enabled&quot;:true,&quot;hide&quot;:false,&quot;slidesPerGroup&quot;:1,&quot;setWrapperSize&quot;:true,&quot;resizeObserver&quot;:true,&quot;updateOnWindowResize&quot;:true,&quot;scrollbar&quot;:{&quot;draggable&quot;:true,&quot;dragSize&quot;:78},&quot;injectStyles&quot;:[&quot;.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {\n                    left: 50%;\n                    transform: translateX(-50%);\n                    cursor: pointer;\n                    background: #c1c1c1;\n                    height: 5px;\n                }&quot;],&quot;breakpoints&quot;:{&quot;310&quot;:{&quot;slidesPerView&quot;:1,&quot;spaceBetween&quot;:0,&quot;scrollbar&quot;:{&quot;draggable&quot;:true,&quot;dragSize&quot;:43},&quot;snapGrid&quot;:&quot;auto&quot;,&quot;snapToStart&quot;:true},&quot;520&quot;:{&quot;slidesPerView&quot;:1,&quot;spaceBetween&quot;:0,&quot;snapGrid&quot;:&quot;auto&quot;,&quot;snapToStart&quot;:true},&quot;630&quot;:{&quot;slidesPerView&quot;:1,&quot;spaceBetween&quot;:0,&quot;snapGrid&quot;:&quot;auto&quot;,&quot;snapToStart&quot;:true,&quot;scrollbar&quot;:false,&quot;navigation&quot;:{&quot;nextEl&quot;:&quot;.swiper-button-next&quot;,&quot;prevEl&quot;:&quot;.swiper-button-prev&quot;}},&quot;769&quot;:{&quot;slidesPerView&quot;:1,&quot;spaceBetween&quot;:0,&quot;snapGrid&quot;:&quot;auto&quot;,&quot;snapToStart&quot;:true,&quot;scrollbar&quot;:false,&quot;navigation&quot;:{&quot;nextEl&quot;:&quot;.swiper-button-next&quot;,&quot;prevEl&quot;:&quot;.swiper-button-prev&quot;}},&quot;1101&quot;:{&quot;slidesPerView&quot;:1,&quot;spaceBetween&quot;:0,&quot;snapGrid&quot;:&quot;auto&quot;,&quot;snapToStart&quot;:true,&quot;scrollbar&quot;:false,&quot;navigation&quot;:{&quot;nextEl&quot;:&quot;.swiper-button-next&quot;,&quot;prevEl&quot;:&quot;.swiper-button-prev&quot;}},&quot;1441&quot;:{&quot;slidesPerView&quot;:1,&quot;spaceBetween&quot;:0,&quot;snapGrid&quot;:&quot;auto&quot;,&quot;snapToStart&quot;:true,&quot;scrollbar&quot;:false,&quot;navigation&quot;:{&quot;nextEl&quot;:&quot;.swiper-button-next&quot;,&quot;prevEl&quot;:&quot;.swiper-button-prev&quot;}}}}">
+            <swiper-container class="homepage_mega_swiper_slider" init="false">
+              <swiper-slide class="slide swiper-slide-next" style="background: {{ section.settings.slidebg }};" role="group" aria-label="2 / 4" data-swiper-slide-index="1">
+                <div class="homepage_mega_slider_v2_block">
+                  <div class="homepage_mega_slider_v2_block_inner">
+                    <div class="homepage_mega_slider_v2_block_img_wrapper">
+                      <div class="homepage_mega_slider_v2_block_img">
+                        <img src="{{ section.settings.img | img_url: '' }}" alt="" class="slide_image" loading="lazy" width="870" height="846">
+                      </div>
+                    </div>
+                    <div class="homepage_mega_slider_v2_block_content">
+                      <style>
+                        .pre_heading_ed679787-3699-4b2b-8722-201191d281a8 {
+                          color: {{section.settings.color_title}};
+                        }
+
+                        .heading_ed679787-3699-4b2b-8722-201191d281a8 {
+                          color: {{section.settings.heading_color}};
+                        }
+
+                        .subheading_ed679787-3699-4b2b-8722-201191d281a8 {
+                          color: {{section.setting.text_color}};
+                        }
+
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8.homepage_mega_slider_v2_btn {
+                          background: {{section.settings.btnbgclr}};
+                          box-shadow: 7px 7px #ffffff;
+                        }
+
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8.homepage_mega_slider_v2_btn .cta_btn_label,
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8.homepage_mega_slider_v2_btn_mobile {
+                          color: #ffffff;
+                        }
+
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8 .cta_btn_icon svg path {
+                          fill: #ffffff;
+                          stroke: #000000;
+                        }
+                      </style>
+                      <h3 class="homepage_mega_slider_v2_pre_heading pre_heading_ed679787-3699-4b2b-8722-201191d281a8"> {{ section.settings.topheading }} </h3>
+                      <h2 class="homepage_mega_slider_v2_heading heading_ed679787-3699-4b2b-8722-201191d281a8"> {{ section.settings.heading }} </h2>
+                      <p class="homepage_mega_slider_v2_subheading subheading_ed679787-3699-4b2b-8722-201191d281a8"> {{ section.settings.text }} </p>
+                    {%  if section.settings.btn %}
+                      <div class="homepage_mega_slider_v2_button_wrapper">
+                        <a class="d-flex align-items-center d-md-none homepage_mega_slider_v2_btn_mobile ghost_btn_ed679787-3699-4b2b-8722-201191d281a8" href="{{ section.settings.btnurl }}">
+                          <span class="btn_mobile_label">Shop Now</span>
+                          <span class="btn_mobile_icon">
+                            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M0.207852 9.80237C0.0692841 9.67062 0 9.51462 0 9.33439C0 9.1545 0.0692841 8.99868 0.207852 8.86693L4.2679 5.00659L0.193995 1.13307C0.0646651 1.0101 0 0.85639 0 0.671937C0 0.487484 0.0692841 0.329381 0.207852 0.197628C0.34642 0.0658761 0.510485 0 0.700046 0C0.889238 0 1.05312 0.0658761 1.19169 0.197628L5.84758 4.63768C5.903 4.69038 5.94236 4.74747 5.96563 4.80896C5.98854 4.87044 6 4.93632 6 5.00659C6 5.07685 5.98854 5.14273 5.96563 5.20422C5.94236 5.2657 5.903 5.32279 5.84758 5.37549L1.17783 9.81555C1.0485 9.93851 0.889238 10 0.700046 10C0.510485 10 0.34642 9.93412 0.207852 9.80237Z" fill="white"></path>
+                            </svg>
+                          </span>
+                        </a>
+                        <a class="d-none d-md-flex homepage_mega_slider_v2_btn ghost_btn ghost_btn_ed679787-3699-4b2b-8722-201191d281a8" href="{{section.settings.btnurl}}">
+                          <span class="cta_btn_icon"> {%  include 'cta_icon' %}} </span>
+                          <span class="cta_btn_label">Shop Now</span>
+                        </a>
+                      </div>
+                          {%endif%}
+                    </div>
+                  </div>
+                </div>
+                <div class="slider_navigation_arrow_wrapper">
+                  <div class="swiper-button-prev navigation_btn" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-36b3834c10e7fd8c1">
+                    <svg class="prev_btn" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="40" cy="40" r="40" fill="white"></circle>
+                      <path d="M43.4492 31.3751C43.6992 31.6251 43.8242 31.9211 43.8242 32.2631C43.8242 32.6044 43.6992 32.9001 43.4492 33.1501L36.1242 40.4751L43.4742 47.8251C43.7076 48.0584 43.8242 48.3501 43.8242 48.7001C43.8242 49.0501 43.6992 49.3501 43.4492 49.6001C43.1992 49.8501 42.9032 49.9751 42.5612 49.9751C42.2199 49.9751 41.9242 49.8501 41.6742 49.6001L33.2742 41.1751C33.1742 41.0751 33.1032 40.9668 33.0612 40.8501C33.0199 40.7334 32.9992 40.6084 32.9992 40.4751C32.9992 40.3418 33.0199 40.2168 33.0612 40.1001C33.1032 39.9834 33.1742 39.8751 33.2742 39.7751L41.6992 31.3501C41.9326 31.1168 42.2199 31.0001 42.5612 31.0001C42.9032 31.0001 43.1992 31.1251 43.4492 31.3751Z" fill="#63D1F4"></path>
+                    </svg>
+                  </div>
+                  <div class="swiper-button-next navigation_btn" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-36b3834c10e7fd8c1">
+                    <svg class="next_btn" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="40" cy="40" r="40" fill="white"></circle>
+                      <path d="M35.375 49.6C35.125 49.35 35 49.054 35 48.712C35 48.3707 35.125 48.075 35.375 47.825L42.7 40.5L35.35 33.15C35.1167 32.9167 35 32.625 35 32.275C35 31.925 35.125 31.625 35.375 31.375C35.625 31.125 35.921 31 36.263 31C36.6043 31 36.9 31.125 37.15 31.375L45.55 39.8C45.65 39.9 45.721 40.0083 45.763 40.125C45.8043 40.2417 45.825 40.3667 45.825 40.5C45.825 40.6333 45.8043 40.7583 45.763 40.875C45.721 40.9917 45.65 41.1 45.55 41.2L37.125 49.625C36.8917 49.8583 36.6043 49.975 36.263 49.975C35.921 49.975 35.625 49.85 35.375 49.6Z" fill="#63D1F4"></path>
+                    </svg>
+                  </div>
+                </div>
+              </swiper-slide>
+{% for block in section.blocks %}
+            {% if 'slide' %}
+                             <swiper-slide class="slide swiper-slide-next" style="background: {{ block.settings.slidebg }};" role="group" aria-label="2 / 4" data-swiper-slide-index="1">
+                <div class="homepage_mega_slider_v2_block">
+                  <div class="homepage_mega_slider_v2_block_inner">
+                    <div class="homepage_mega_slider_v2_block_img_wrapper">
+                      <div class="homepage_mega_slider_v2_block_img">
+                        <img src="{{ block.settings.img | img_url: '' }}" alt="" class="slide_image" loading="lazy" width="870" height="846">
+                      </div>
+                    </div>
+                    <div class="homepage_mega_slider_v2_block_content">
+                      <style>
+                        .pre_heading_ed679787-3699-4b2b-8722-201191d281a8 {
+                          color: {{block.settings.color_title}};
+                        }
+
+                        .heading_ed679787-3699-4b2b-8722-201191d281a8 {
+                          color: {{block.settings.heading_color}};
+                        }
+
+                        .subheading_ed679787-3699-4b2b-8722-201191d281a8 {
+                          color: {{block.settings.text_color}};
+                        }
+
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8.homepage_mega_slider_v2_btn {
+                          background: {{block.settings.btnbgclr}};
+                          box-shadow: 7px 7px #ffffff;
+                        }
+
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8.homepage_mega_slider_v2_btn .cta_btn_label,
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8.homepage_mega_slider_v2_btn_mobile {
+                          color: #ffffff;
+                        }
+
+                        .ghost_btn_ed679787-3699-4b2b-8722-201191d281a8 .cta_btn_icon svg path {
+                          fill: #ffffff;
+                          stroke: #000000;
+                        }
+                      </style>
+                      <h3 class="homepage_mega_slider_v2_pre_heading pre_heading_ed679787-3699-4b2b-8722-201191d281a8"> {{ block.settings.topheading }} </h3>
+                      <h2 class="homepage_mega_slider_v2_heading heading_ed679787-3699-4b2b-8722-201191d281a8"> {{ block.settings.heading }} </h2>
+                      <p class="homepage_mega_slider_v2_subheading subheading_ed679787-3699-4b2b-8722-201191d281a8"> {{ block.settings.text }} </p>
+                    {%  if block.settings.btn %}
+                      <div class="homepage_mega_slider_v2_button_wrapper">
+                        <a class="d-flex align-items-center d-md-none homepage_mega_slider_v2_btn_mobile ghost_btn_ed679787-3699-4b2b-8722-201191d281a8" href="{{block.settings.btnurl}}">
+                          <span class="btn_mobile_label">Shop Now</span>
+                          <span class="btn_mobile_icon">
+                            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M0.207852 9.80237C0.0692841 9.67062 0 9.51462 0 9.33439C0 9.1545 0.0692841 8.99868 0.207852 8.86693L4.2679 5.00659L0.193995 1.13307C0.0646651 1.0101 0 0.85639 0 0.671937C0 0.487484 0.0692841 0.329381 0.207852 0.197628C0.34642 0.0658761 0.510485 0 0.700046 0C0.889238 0 1.05312 0.0658761 1.19169 0.197628L5.84758 4.63768C5.903 4.69038 5.94236 4.74747 5.96563 4.80896C5.98854 4.87044 6 4.93632 6 5.00659C6 5.07685 5.98854 5.14273 5.96563 5.20422C5.94236 5.2657 5.903 5.32279 5.84758 5.37549L1.17783 9.81555C1.0485 9.93851 0.889238 10 0.700046 10C0.510485 10 0.34642 9.93412 0.207852 9.80237Z" fill="white"></path>
+                            </svg>
+                          </span>
+                        </a>
+                        <a class="d-none d-md-flex homepage_mega_slider_v2_btn ghost_btn ghost_btn_ed679787-3699-4b2b-8722-201191d281a8" href="{{block.settings.btnurl}}">
+                          <span class="cta_btn_icon"> {%  include 'cta_icon' %}} </span>
+                          <span class="cta_btn_label">Shop Now</span>
+                        </a>
+                      </div>
+                          {%endif%}
+                    </div>
+                  </div>
+                </div>
+                <div class="slider_navigation_arrow_wrapper">
+                  <div class="swiper-button-prev navigation_btn" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-36b3834c10e7fd8c1">
+                    <svg class="prev_btn" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="40" cy="40" r="40" fill="white"></circle>
+                      <path d="M43.4492 31.3751C43.6992 31.6251 43.8242 31.9211 43.8242 32.2631C43.8242 32.6044 43.6992 32.9001 43.4492 33.1501L36.1242 40.4751L43.4742 47.8251C43.7076 48.0584 43.8242 48.3501 43.8242 48.7001C43.8242 49.0501 43.6992 49.3501 43.4492 49.6001C43.1992 49.8501 42.9032 49.9751 42.5612 49.9751C42.2199 49.9751 41.9242 49.8501 41.6742 49.6001L33.2742 41.1751C33.1742 41.0751 33.1032 40.9668 33.0612 40.8501C33.0199 40.7334 32.9992 40.6084 32.9992 40.4751C32.9992 40.3418 33.0199 40.2168 33.0612 40.1001C33.1032 39.9834 33.1742 39.8751 33.2742 39.7751L41.6992 31.3501C41.9326 31.1168 42.2199 31.0001 42.5612 31.0001C42.9032 31.0001 43.1992 31.1251 43.4492 31.3751Z" fill="#63D1F4"></path>
+                    </svg>
+                  </div>
+                  <div class="swiper-button-next navigation_btn" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-36b3834c10e7fd8c1">
+                    <svg class="next_btn" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="40" cy="40" r="40" fill="white"></circle>
+                      <path d="M35.375 49.6C35.125 49.35 35 49.054 35 48.712C35 48.3707 35.125 48.075 35.375 47.825L42.7 40.5L35.35 33.15C35.1167 32.9167 35 32.625 35 32.275C35 31.925 35.125 31.625 35.375 31.375C35.625 31.125 35.921 31 36.263 31C36.6043 31 36.9 31.125 37.15 31.375L45.55 39.8C45.65 39.9 45.721 40.0083 45.763 40.125C45.8043 40.2417 45.825 40.3667 45.825 40.5C45.825 40.6333 45.8043 40.7583 45.763 40.875C45.721 40.9917 45.65 41.1 45.55 41.2L37.125 49.625C36.8917 49.8583 36.6043 49.975 36.263 49.975C35.921 49.975 35.625 49.85 35.375 49.6Z" fill="#63D1F4"></path>
+                    </svg>
+                  </div>
+                </div>
+              </swiper-slide>
+              {% endif %}
+
+{% endfor %}
+
+
+
+
+              
+
+            </swiper-container>
+          </swiper-slider>
+        </div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+  const mega_slider_params = {
+    direction: 'horizontal',
+    freeMode: {
+      enabled: false,
+    },
+    slidesPerView: 1,
+    autoplay: {
+       delay: 5000,
+    },
+    autoHeight: true,
+    loop: true,
+    speed: 300,
+    enabled: true,
+    hide: false,
+    slidesPerGroup: 1,
+    setWrapperSize: true,
+    resizeObserver: true,
+    updateOnWindowResize: true,
+    scrollbar: {
+      draggable: true,
+      dragSize: 78,
+    },
+    injectStyles: [
+      `.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+                    left: 50%;
+                    transform: translateX(-50%);
+                    cursor: pointer;
+                    background: #c1c1c1;
+                    height: 5px;
+                }`,
+    ],
+    breakpoints: {
+      310: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        scrollbar: {
+          draggable: true,
+          dragSize: 43,
+        },
+        snapGrid: 'auto',
+        snapToStart: true,
+      },
+      520: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        snapGrid: 'auto',
+        snapToStart: true,
+      },
+      630: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        snapGrid: 'auto',
+        snapToStart: true,
+        scrollbar: false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      },
+      769: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        snapGrid: 'auto',
+        snapToStart: true,
+        scrollbar: false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      },
+      1101: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        snapGrid: 'auto',
+        snapToStart: true,
+        scrollbar: false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      },
+      1441: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        snapGrid: 'auto',
+        snapToStart: true,
+        scrollbar: false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      },
+    },
+  };
+  const megaSwiperSlider = document.querySelector('.homepage_mega_slider');
+  megaSwiperSlider.setAttribute('data-swiperParams', JSON.stringify(mega_slider_params));
+</script>
+
+
+</section>
+{% schema %}
+  {
+    "name": "Mega Slider",
+    "settings": [
+      {
+        "type":"image_picker",
+        "label":"Image",
+        "id":"img"
+      },
+      
+      
+      {
+  "type": "color",
+  "id": "slidebg",
+  "label": "Slide Background Color",
+  "default": "#000"
+},
+    {
+      "type":"text",
+      "id":"topheading",
+      "label":"Enter Top Heading"
+    },
+   
+      {
+  "type": "color",
+  "id": "color_title",
+  "label": "Top Heading Color",
+  "default": "#FFFFFF"
+},
+      {
+      "type":"text",
+      "id":"heading",
+      "label":"Enter Heading"
+    },
+          {
+  "type": "color",
+  "id": "heading_color",
+  "label": "Heading color",
+  "default": "#FFFFFF"
+},   
+      {
+      "type":"text",
+      "id":"text",
+      "label":"Enter Text"
+    },
+      {
+  "type": "color",
+  "id": "text_color",
+  "label": "Text Color",
+  "default": "#FFFFFF"
+},  
+      {
+        "type":"checkbox",
+        "label":"Enable Button",
+        "id":"btn",
+        "default":true
+      },
+      {
+  "type": "color",
+  "id": "btnbgclr",
+  "label": "Button color",
+  "default": "#B93AC9"
+},
+         {
+  "type": "text",
+  "id": "btnurl",
+  "label": "Button Url"
+  
+}
+    
+      
+    ],
+    "blocks":[
+      {
+        "type":"slide",
+        "name":"Add Slide",
+        "settings":[  {
+        "type":"image_picker",
+        "label":"Image",
+        "id":"img"
+      },
+      
+      
+      {
+  "type": "color",
+  "id": "slidebg",
+  "label": "Slide Background Color",
+  "default": "#B93AC9"
+},
+    {
+      "type":"text",
+      "id":"topheading",
+      "label":"Enter Top Heading"
+    },
+   
+      {
+  "type": "color",
+  "id": "color_title",
+  "label": "Top Heading Color",
+  "default": "#FFFFFF"
+},
+      {
+      "type":"text",
+      "id":"heading",
+      "label":"Enter Heading"
+    },
+          {
+  "type": "color",
+  "id": "heading_color",
+  "label": "Heading color",
+  "default": "#FFFFFF"
+},   
+      {
+      "type":"text",
+      "id":"text",
+      "label":"Enter Text"
+    },
+      {
+  "type": "color",
+  "id": "text_color",
+  "label": "Text Color",
+  "default": "#FFFFFF"
+},  
+      {
+        "type":"checkbox",
+        "label":"Enable Button",
+        "id":"btn",
+        "default":true
+      },
+      {
+  "type": "color",
+  "id": "btnbgclr",
+  "label": "Button color",
+  "default": "#000"
+},
+               {
+  "type": "text",
+  "id": "btnurl",
+  "label": "Button Url"
+               }
+      ]
+      }
+    ],
+    	"presets": [
+    {
+      "name": "Mega Slider"
+      }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

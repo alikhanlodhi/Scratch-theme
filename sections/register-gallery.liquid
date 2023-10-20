@@ -1,0 +1,123 @@
+<style>
+  .register-gallery-area{
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
+    overflow-x:auto;
+    flex-shrink:1
+}
+.gallery-scrollbar::-webkit-scrollbar{
+    width:20px;
+    background:transparent
+}
+.resgister-gallery-section{
+    margin-top:155px;
+    overflow:hidden
+}
+@media (min-width: 1000px){
+    .new_register_gallery .gallery-item{
+        margin-left:-30px
+    }
+    .new_register_gallery .gallery-item img{
+        width:150px;
+        height:100%;
+        object-fit:cover
+    }
+}
+@media (min-width: 1300px){
+    .new_register_gallery .gallery-item{
+        margin-left:-38px
+    }
+    .new_register_gallery .gallery-item img{
+        width:186px;
+        height:100%;
+        object-fit:cover
+    }
+}
+@media (max-width: 767px){
+    .resgister-gallery-section{
+        display:none
+    }
+}
+
+</style>
+
+
+
+<div  class="shopify-section new_register_gallery dark-bg">
+
+
+<div class="resgister-gallery-section">
+    <div class="container-fluid">
+        <div class="register-gallery-area gallery-scrollbar">
+            
+ 	
+              {% for block in section.blocks %}  
+          {% if 'slide' %}
+            {%- liquid
+  assign product = block.settings.product
+
+  if section.settings.media_size == 'large'
+    assign media_width = 0.65
+  elsif section.settings.media_size == 'medium'
+    assign media_width = 0.55
+  elsif section.settings.media_size == 'small'
+    assign media_width = 0.45
+  endif
+-%}
+         
+                <a class="gallery-item" href="{{ product.url }}">
+                  {% if product.images.size >= 3 %}
+  <img src="{{ product.images[2].src | product_img_url: '' }}" | escape }}">
+{% endif %}
+                </a>
+                {% endif %}
+                {% endfor %}
+            
+                
+            
+                
+            
+              
+                
+            
+        </div>
+    </div>
+</div>
+
+
+  
+
+  </div>
+{% schema %}
+  {
+    "name": "Register Slider",
+    "blocks":[{
+      "name":"Product Image",
+      "type":"slide",
+      "limit":7,
+    "settings": [
+     {
+  "type": "product",
+  "id": "product",
+  "label": "product"
+}
+    ]
+      }],
+    
+    	"presets": [
+    {
+      "name": "Register Slider"
+      }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+  p {
+    color:white !important;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

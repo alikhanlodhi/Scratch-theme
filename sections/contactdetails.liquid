@@ -1,0 +1,234 @@
+<div class="unknown">
+<div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12">
+                    <div class="contact-item new-mail-area">
+                        
+                        <h4 class="mail-heading">MAIL</h4>
+                        
+
+                        
+                            {% for block in section.blocks %}
+                             {% if 'mail' %}
+                                <div class="contact-block">
+                                    <h4 class="contact-block-heading mb-0">{{ block.settings.mailtype }}</h4>
+                                    <a href="mailto:{{ block.settings.mailaddress }}" class="contact-block-text" aria-describedby="a11y-external-message">{{ block.settings.mailaddress }}</a>
+                                </div>
+                            {% endif %}
+                             
+                        {% endfor %}
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12">
+                    <div class="contact-item new-address-area">
+                       
+                          
+                        <h4 class="mail-heading">ADDRESS</h4>
+                        
+      
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                         
+                                <div class="contact-block">
+                                    <h4 class="contact-block-heading mb-0">HEADQUARTERS</h4>
+                                    <a class="contact-block-text mb-0">{{ section.settings.address }}</a>
+                                </div>
+                          
+                          
+                            
+                        
+                    </div>
+
+                    <div class="contact-item new-phone-area">
+                        
+                        <h4 class="mail-heading">PHONE</h4>
+                        
+
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <div class="contact-block">
+                                    <h4 class="contact-block-heading mb-0">Office general inquiries</h4>
+                                    <a href="tel:{{ section.settings.number }}" class="contact-block-text" aria-describedby="a11y-external-message">{{ section.settings.number }}</a>
+                                </div>
+                            
+                        
+                    </div> 
+                                       
+                </div>
+            </div>
+        </div>
+</div>
+{% schema %}
+  {
+    "name": "Contact Details",
+    "settings": [
+      
+        {
+        "type":"text",
+          "id":"address",
+          "label":"Enter Address"
+        },
+      {
+        "type":"text",
+          "id":"number",
+          "label":"Enter Phone Number"
+        }
+    ],
+    "blocks":[
+      {
+      "name":"Email",
+      "type":"mail",
+      "settings":[
+        {
+        "type":"text",
+          "id":"mailtype",
+          "label":"Enter Email Type"
+        },
+        {
+        "type":"text",
+          "id":"mailaddress",
+          "label":"Enter Email Address"
+        }
+      ]
+      
+    }
+      
+      
+      
+    ],
+    "presets":[{
+      "name":"Contact Details"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+  .mail-heading {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    color: #B93AC9;
+    margin: 0;
+    margin-bottom: 48px;
+}
+.contact-block-text,
+.contact-block-heading {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.1;
+    color: #919191;
+}
+.contact-block-heading {
+    text-transform: uppercase;
+}
+.contact-block-text {
+    font-family: 'RBNo3.1 W00 Bold';
+    font-weight: 450;
+    font-size: 36px;
+    padding-top: 8px;
+    color: #fff !important;
+    display: block;
+}
+.contact-block:not(:first-child) {
+    margin-top: 40px;
+}
+.contact-item {
+    padding-top: 74px;
+}
+.new-contact-blocks-inner {
+    margin-top: -74px;
+}
+.new-contact-blocks {
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* responsive */
+@media (min-width: 1511px) {
+  .new-phone-area, .new-address-area {
+      margin-left: 185px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1510px) {
+  .new-phone-area, .new-address-area {
+      margin-left: 100px;
+  }
+}
+
+@media (max-width: 767px) {
+    .mail-heading {
+        margin-bottom: 25px;
+        font-size: 16.87px;
+    }
+    .contact-block-text,
+    .contact-block-heading {
+        font-size: 12.87px;
+        line-height: 14.29px;
+    }
+    .contact-block-text {
+        font-size: 25px;
+        line-height: 28.57px;
+    }
+    .contact-block:not(:first-child) {
+        margin-top: 20px;
+    }
+    .contact-item {
+        padding-top: 48px;
+    }
+    .new-contact-blocks-inner {
+        margin-top: -48px;
+    }
+}
+
+@media (max-width: 374px) {
+    .contact-block-text {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 340px) {
+    .contact-block-text {
+        font-size: 20px;
+    }
+}
+  a {
+    font-family:RBNo3.1 W00 Bold;
+  }
+  .contact-block-text mb- {
+    font-family:RBNo3.1 W00 Bold !important;}
+  .unknown{
+    padding:1em 0em;
+  }
+  {% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

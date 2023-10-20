@@ -1,0 +1,179 @@
+<style>
+.homepage_video_v2_inner{
+    position:relative
+}
+.homepage_video_v2_section .video_thumbnail_wrapper{
+    z-index:9;
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background-color:#000
+}
+.homepage_video_v2_section .video_thumbnail{
+    display:block;
+    width:100%;
+    height:100%;
+    position:relative
+}
+.homepage_video_v2_section .video_thumbnail img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    padding-top:50px
+}
+.homepage_video_v2_section .video_player{
+    width:100%!important;
+    height:auto!important;
+    max-height:604px;
+    padding-top:75px
+}
+.homepage_video_v2_section .thumbnail_content_wrapper{
+    width:100%;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    position:absolute;
+    top:auto;
+    bottom:10%;
+    left:auto;
+    right:50%;
+    transform:translate(50%);
+    gap:10px
+}
+.homepage_video_v2_section .thumbnail_text_wrapper{
+    width:80%
+}
+.homepage_video_v2_section .thumbnail_text{
+    font-family:"RBNo3.1-Bold";
+    font-style:normal;
+    font-weight:450;
+    font-size:46px;
+    line-height:105%;
+    text-align:center;
+    color:#fff
+}
+.homepage_video_v2_section .thumbnail_icon_wrapper{
+    cursor:pointer
+}
+.homepage_video_v2_section .thumbnail_icon_wrapper svg{
+    width:65px;
+    height:65px
+}
+.homepage_video_v2_video_wrapper{
+    display:block;
+    width:100%;
+    height:100%
+}
+@media screen and (min-width: 630px){
+    .homepage_video_v2_video_wrapper{
+        width:100vw;
+        height:auto
+    }
+    .homepage_video_v2_section .thumbnail_text{
+        font-size:56px
+    }
+}
+@media screen and (min-width: 990px){
+    .homepage_video_v2_section .thumbnail_content_wrapper{
+        bottom:35%
+    }
+}
+@media screen and (min-width: 1300px){
+    .homepage_video_v2_section .thumbnail_content_wrapper{
+        bottom:35%
+    }
+    .homepage_video_v2_section .thumbnail_text{
+        font-size:66px
+    }
+}
+@media screen and (min-width: 1441px){
+    .homepage_video_v2_section .thumbnail_content_wrapper{
+        bottom:30%
+    }
+    .homepage_video_v2_section .thumbnail_text{
+        font-size:70px
+    }
+}
+@media screen and (min-width: 1920px){
+    .homepage_video_v2_video_wrapper{
+        width:1920px;
+        height:886px
+    }
+}
+</style>
+<section  class="shopify-section homepage_video_v2_section">
+
+<div class="homepage_video_v2_container">
+  <div class="homepage_video_v2_wrapper">
+    <div class="homepage_video_v2_inner">
+      <div class="video_thumbnail_wrapper">
+        <picture class="video_thumbnail">
+          <source type="image/jpg" srcset="{{ section.settings.bgimg | img_url: '' }}" media="(max-width: 580px)">
+          <source type="image/jpg" srcset="{{ section.settings.bgimg | img_url: '' }}" media="(min-width: 581px)">
+          <img src="{{ section.settings.bgimg | img_url: '' }}" alt="" loading="lazy">
+        </picture>
+        <div class="thumbnail_content_wrapper">
+          <div class="thumbnail_text_wrapper">
+            <h2 class="thumbnail_text">{{ section.settings.heading }}</h2>
+          </div>
+          <div class="thumbnail_icon_wrapper" id="play-button">
+          <img src="{{ section.settings.play | img_url: '100px' }}">
+            
+          </div>
+        </div>
+      </div>
+      <video-player class="homepage_video_v2_video_wrapper" data-mobile-video-src="{{ section.settings.addvideo }}" data-desktop-video-src="{{ section.settings.addvideo }}" data-controls="true" data-auto-play="false" data-loop="true" data-muted="false">
+       <video class="video_player" controls="" loop="" src="{{ section.settings.addvideo }}" data-desktop="true">
+          <source class="mobile_video" src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </video-player>
+    </div>
+  </div>
+</div>
+
+
+</section>
+{% schema %}
+  {
+    "name": "Custom Video Section",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"bgimg",
+        "label":"Background Image"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading"
+      },
+      
+      {
+        "type":"image_picker",
+        "id":"play",
+        "label":"Image"
+      },
+      {
+        "type":"textarea",
+        
+        "id":"addvideo",
+        "label":" Add Video Url "
+      }
+    ],
+    	"presets": [
+    {
+      "name": "Custom Video Section"
+      }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

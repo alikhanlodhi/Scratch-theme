@@ -1,0 +1,313 @@
+html,
+body,
+.bg-black {
+  background: #000;
+}
+.new-design-collection {
+  margin-top: 35px;
+}
+.new-design-collection .outer-head h1 {
+  font-family: "RBNo3.1-Bold";
+  color: #fff;
+  margin: 0;
+  font-size: 32px;
+}
+.new-design-collection .collec-hero {
+  position: relative;
+  display: none;
+}
+.title-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 33px 0 46px;
+}
+.new-design-collection .new-product-items-grid {
+  column-gap: 110px;
+  row-gap: 120px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: stretch;
+}
+.select-box {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  font-family: Open Sans, Helvetica Neue, Segoe UI, Calibri, Arial, sans-serif;
+  font-size: 18px;
+  color: #fff;
+  z-index: 9;
+}
+.select-box__current {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+.select-box__current:focus + .select-box__list {
+  opacity: 1;
+  overflow: hidden;
+  -webkit-animation-name: none;
+  animation-name: none;
+}
+.select-box__current:focus + .select-box__list .select-box__option {
+  cursor: pointer;
+  overflow-wrap: break-word;
+}
+.select-box__icon {
+  position: absolute;
+  top: 45%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 9.63px;
+  opacity: 1;
+  transition: 0.2s ease;
+}
+.select-box__value {
+  display: flex;
+}
+.select-box__input {
+  display: none;
+}
+.select-box__input:checked + .select-box__input-text {
+  display: block;
+  margin: 0;
+  padding-right: 29px;
+}
+.select-box__list,
+.select-box__input-text {
+  border: 0.601942px solid #828282;
+  border-radius: 9.02913px;
+}
+.select-box__input-text {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 7.22px 10.23px;
+  background: #000000;
+}
+.select-box__list {
+  position: absolute;
+  width: 130px;
+  top: 140%;
+  right: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  -webkit-animation-name: HideList;
+  animation-name: HideList;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: step-start;
+  animation-timing-function: step-start;
+  background: #000000;
+}
+.select-box__input-text,
+.select-box__list .select-box__option {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10.835px;
+  line-height: 96%;
+  color: #fff;
+}
+.select-box__list .select-box__option {
+  font-weight: 700;
+}
+.select-box__list .select-box__option.item-first {
+  font-weight: 500;
+}
+.select-box__option {
+  display: block;
+  padding: 7.22px 10.23px;
+}
+.select-box__option.item-first {
+  display: flex;
+  justify-content: space-between;
+}
+.select-box__list .select-box__icon {
+  width: 9px;
+  position: relative;
+  top: unset;
+  transform: unset;
+  right: 0;
+}
+@-webkit-keyframes HideList {
+  0% {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+@keyframes HideList {
+  0% {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+.collection-featured-block {
+  margin-bottom: 30px;
+}
+.collection-featured-block .small-text {
+  font-family: "RBNo3.1 W00 Light";
+  font-size: 16px;
+  line-height: 90%;
+  color: #fff;
+}
+.collection-featured-block .featured-heading {
+  font-family: "RBNo3.1-Bold";
+  font-size: 32px;
+  line-height: 90%;
+  color: #fff;
+}
+.collection-featured-block .featured-subheading {
+  max-width: 576px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #fff;
+}
+.collection-featured-block br {
+  display: none;
+}
+@media (min-width: 768px) {
+  .collection-featured-block {
+    margin-bottom: 37px;
+  }
+  .collection-featured-block br {
+    display: block;
+  }
+  .collection-featured-block .small-text {
+    font-size: 18px;
+  }
+  .collection-featured-block .featured-heading {
+    font-size: 65px;
+  }
+  .collection-featured-block .featured-subheading {
+    font-size: 22px;
+    line-height: 130%;
+  }
+  .new-design-collection {
+    margin-top: 35px;
+  }
+  .new-design-collection .collec-hero {
+    display: block;
+  }
+  .new-design-collection .quote-symbol-paragraph {
+    position: absolute;
+    font-family: guthen_bloots_personal_useRg;
+    font-size: 161.695px;
+    font-weight: 400;
+    font-style: italic;
+    left: -33px;
+    top: 66px;
+  }
+  .new-design-collection .outer-head h1 {
+    font-size: 90px;
+  }
+  .new-design-collection .collec-hero p {
+    font-family: "RBNo3.1-BoldItalic";
+    font-weight: 450;
+    font-size: 90px;
+    line-height: 100%;
+    color: #fff;
+    padding: 4rem 0 2rem;
+    max-width: 1339px;
+    margin-left: 40px;
+  }
+  .new-design-collection .collec-hero:after {
+    content: "";
+    width: 100%;
+    height: 8px;
+    background: url(line-gradient.png) no-repeat;
+    display: inline-block;
+    background-size: contain;
+  }
+  .title-sort-container {
+    padding: 73px 0;
+  }
+  .select-box__list,
+  .select-box__input-text {
+    border: 1px solid #828282;
+    border-radius: 15px;
+  }
+  .select-box__input-text,
+  .select-box__list .select-box__option {
+    font-size: 18px;
+  }
+  .select-box__input:checked + .select-box__input-text {
+    padding-right: 50px;
+  }
+  .select-box__input-text,
+  .select-box__option {
+    padding: 12px 17px;
+  }
+  .select-box__icon {
+    top: 48%;
+    right: 17px;
+  }
+  .select-box__list .select-box__icon,
+  .select-box__icon {
+    width: 16px;
+  }
+  .select-box__list {
+    width: 220px;
+  }
+}
+@media (min-width: 992px) {
+  .collection-featured-block .small-text {
+    font-size: 24px;
+  }
+  .collection-featured-block .featured-heading {
+    font-size: 70px;
+  }
+  .collection-featured-block .featured-subheading {
+    font-size: 30px;
+    line-height: 130%;
+  }
+}
+@media (min-width: 1200px) {
+  .new-design-collection {
+    margin-top: 114px;
+  }
+  .new-design-collection.show_featured_block {
+    margin-top: 10px;
+  }
+  .title-sort-container {
+    padding: 103px 0 73px;
+  }
+  .new-design-collection .outer-head h1 {
+    font-size: 60px;
+    font-weight: 450;
+    line-height: 100%;
+  }
+}
+@media (min-width: 1400px) {
+  .new-design-collection .collec-hero p {
+    margin-left: 0;
+  }
+  .new-design-collection .quote-symbol-paragraph {
+    left: -73px;
+  }
+  .select-box__list {
+    right: 50%;
+    transform: translate(50%);
+  }
+}
+@media screen and (max-width: 520px) {
+  .new-design-collection .new-product-items-grid {
+    row-gap: 40px;
+  }
+  .new-design-collection {
+    margin-top: 20px;
+  }
+}

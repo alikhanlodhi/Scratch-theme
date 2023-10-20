@@ -1,0 +1,374 @@
+/* body */
+.dark-bg {
+    position: relative;
+    background: #000;
+}
+/* homepage hero */
+.homepage_hero_v2_section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    overflow-x: hidden;
+}
+/* .homepage_hero_v2_container {
+    padding-left: 20px;
+} */
+.homepage_hero_v2_inner {
+    position: relative;
+}
+.homepage_hero_v2_section .lottie_animation {
+    display: block;
+    width: 101px;
+    height: 101px;
+}
+.homepage_hero_v2_text_content_wrapper {
+    /* padding-left: 5px; */
+    position: relative;
+    width: 665px;
+}
+.homepage_hero_v2_section .homepage_hero_v2_heading {
+    font-family: "RBNo3.1-Bold";
+    font-style: normal;
+    font-weight: 450;
+    font-size: 40px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin: 0;
+    padding-right: 20px;
+}
+.homepage_hero_v2_animation_content_wrapper {
+    /* width: max-content; */
+    width: calc(100% - 665px);
+    /* height: max-content; */
+    position: absolute;
+    top: 17%;
+    right: 0px;
+    /* left: 73%; */
+}
+.mom_is_back {
+    display: block;
+    width: 208px;
+    height: 68px;
+    position: relative;
+    top: -10px;
+    left: -5px;
+}
+.mom_is_back svg {
+    display: block;
+    width: 208px;
+    height: 68px;
+}
+.hero_paint_drips, .hero_paint_drips svg {
+    width: 200.39px;
+    height: 98.21px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: -25.7px;
+}
+.flying_heart {
+    width: 57.11px;
+    height: 64.71px;
+    display: block;
+    position: absolute;
+    bottom: 30px;
+    left: 68%;
+    right: 0;
+}
+.flying_heart_img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.homepage_hero_v2_section .homepage_hero_v2_subheading {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    color: #FFFFFF;
+    margin-top: 13px;
+    padding-bottom: 5px;
+    margin-bottom: 0;
+}
+
+/* btn start */
+.homepage_hero_v2_button_wrapper {
+    margin-top: 18px;
+    height: 55px;
+    width: 175px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.homepage_hero_v2_btn,
+.cta_btn_label {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    color: #FFFFFF;
+}
+
+.homepage_hero_v2_btn {
+    position: relative;
+    background: #B93AC6;
+    border-radius: 50px;
+    width: 170px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 7px 7px #fff;
+    transition: ease-in-out .2s;
+    overflow: hidden;
+}
+
+.cta_btn_icon {
+    margin-right: 19px;
+    transition: ease .4s;
+}
+
+.homepage_hero_v2_button_wrapper:hover .homepage_hero_v2_btn {
+    transform: translate(7px, 7px);
+    transition: ease-in-out .2s;
+    box-shadow: 7px 7px transparent;
+}
+
+.homepage_hero_v2_button_wrapper:hover .cta_btn_icon {
+    transform: translateX(300px);
+    transition: ease-in-out .2s;
+    margin: 0;
+    width: 0;
+    opacity: 0;
+}
+/* btn end */
+
+/* @media screen and (min-width: 380px) {
+    .homepage_hero_v2_animation_content_wrapper {
+        top: 28%;
+        left: 70%;
+    }
+} */
+
+@media screen and (min-width: 580px) {
+    .homepage_hero_v2_animation_content_wrapper {
+        top: 17%;
+        /* left: 75%; */
+    }
+}
+@media screen and (min-width: 630px) {
+    .homepage_hero_v2_inner {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .homepage_hero_v2_animation_content_wrapper {
+        position: static;
+    }
+    /* .homepage_hero_v2_text_content_wrapper {
+        width: 50%;
+    } */
+    .homepage_hero_v2_section .lottie_animation {
+        width: 250px;
+        height: 250px;
+    }
+    .homepage_hero_v2_section .homepage_hero_v2_subheading {
+        display: none;
+    }
+    .flying_heart {
+        width: 83.11px;
+        height: 90.71px;
+        bottom: 30%;
+        left: 75%;
+    }
+}
+@media screen and (min-width: 990px) {
+    .homepage_hero_v2_section .lottie_animation {
+        width: 350px;
+        height: 350px;
+    }
+    .hero_paint_drips,
+    .hero_paint_drips svg {
+        top: 0%;
+        left: -20px;
+        width: 260.39px;
+        height: 198.21px;
+    }
+    .homepage_hero_v2_section .homepage_hero_v2_heading {
+        font-size: 60px;
+    }
+    .homepage_category_slider_v2_section .swiper-horizontal {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+    .homepage_hero_v2_section {
+        padding-bottom: 89px;
+    }
+    .flying_heart {
+        width: 100.11px;
+        height: 120.71px;
+        top: 25%;
+        left: 75%;
+    }
+    .mom_is_back {
+        top: -35px;
+        left: 52%;
+    }
+    .homepage_hero_v2_button_wrapper {
+        margin-top: -25px;
+        width: 235px;
+        height: 62px;
+    }
+    .homepage_hero_v2_btn {
+        width: 225px;
+        height: 53px;
+    }
+}
+@media screen and (min-width: 1300px) {
+    .homepage_hero_v2_section .lottie_animation {
+        width: 350px;
+        height: 350px;
+    }
+    .hero_paint_drips,
+    .hero_paint_drips svg {
+        top: 12px;
+        left: -7%;
+        width: 370.39px;
+        height: 235.21px;
+    }
+    .mom_is_back {
+        top: -50px;
+        left: 54%;
+    }
+    .mom_is_back svg {
+        width: 300px;
+        height: 90px;
+    }
+    .flying_heart {
+        width: 148.88px;
+        height: 168.71px;
+        top: 30%;
+    }
+    .homepage_hero_v2_section .homepage_hero_v2_heading {
+        font-size: 88px;
+    }
+    .homepage_hero_v2_section {
+        padding-top: 130px;
+        padding-bottom: 130px;
+    }
+}
+@media screen and (min-width: 1441px) {
+    .homepage_hero_v2_section .lottie_animation {
+        width: 500px;
+        height: 500px;
+    }
+    .hero_paint_drips,
+    .hero_paint_drips svg {
+        top: 28px;
+        left: -9%;
+        width: 394.58px;
+        height: 188.96px;
+    }
+    .mom_is_back {
+        top: -60px;
+        left: 52%;
+    }
+    .mom_is_back svg {
+        width: 343px;
+        height: 104px;
+    }
+    .flying_heart {
+        left: 78%;
+    }
+    .homepage_hero_v2_animation_content_wrapper {
+        /* width: calc(100% - 645px); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 190px;
+    }
+    .homepage_hero_v2_section .homepage_hero_v2_heading {
+        font-size: 86px;
+    }
+    .homepage_hero_v2_inner {
+        justify-content: center;
+    }
+    .homepage_hero_v2_wrapper {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+}
+
+@media (max-width: 1299px) {
+    .homepage_hero_v2_text_content_wrapper {
+        width: 475px;
+    }
+    .homepage_hero_v2_animation_content_wrapper {
+        width: calc(100% - 475px);
+    }
+    .homepage_hero_v2_section .lottie_animation {
+        width: 85%;
+        height: 85%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 989px) {
+    .homepage_hero_v2_text_content_wrapper {
+        width: 310px;
+    }
+    .homepage_hero_v2_animation_content_wrapper {
+        width: calc(100% - 310px);
+    }
+}
+
+@media (max-width: 629px) {
+    .homepage_hero_v2_section .lottie_animation {
+        min-width: 101px;
+        text-align: left;
+    }
+    .homepage_hero_v2_wrapper {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .homepage_hero_v2_animation_content_wrapper {
+        right: 20%;
+    }
+}
+
+@media (max-width: 400px) {
+    .homepage_hero_v2_text_content_wrapper {
+        width: 100%;
+        max-width: 310px;
+    }
+    .homepage_hero_v2_animation_content_wrapper {
+        width: 110px;
+        right: 7%;
+    }
+}
+
+@media (max-width: 380px) {
+    .homepage_hero_v2_animation_content_wrapper {
+        right: 0;
+    }
+}
+
+@media (max-width: 335px) {
+    .homepage_hero_v2_animation_content_wrapper {
+        right: -20px;
+    }
+}
+
+@media (max-width: 330px) {
+    .homepage_hero_v2_section .homepage_hero_v2_heading {
+        font-size: 36px;
+    }
+}

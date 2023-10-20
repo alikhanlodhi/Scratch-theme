@@ -1,0 +1,47 @@
+<style>
+  .image-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @media (max-width: 600px){
+    .image-bar {
+    display: none;
+  }
+  }
+</style>
+<div class="dark-bg">
+  {% assign image_blocks = section.blocks | where: 'type', 'category_image' %}
+  <div class="image-bar">
+  {% for block in image_blocks %}
+    <img src="{{ block.settings.image | img_url: '186x186' }}">
+    
+  {% endfor %}
+</div>
+  
+</div>
+
+{% schema %} 
+{
+  "name":"Gallery",
+  "blocks":[
+     {
+        "name":"Category Image",
+        "type":"category_image",
+        "settings":[
+           {
+              "type":"image_picker",
+              "id":"image",
+              "label":"Image"
+           }
+        ]
+     }
+  ],
+  
+    	"presets": [
+    {
+      "name": "galley"
+      }
+  ]
+}
+{% endschema %}

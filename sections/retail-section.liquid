@@ -1,0 +1,217 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12">
+        <div class="new-hero-content">
+          <div class="new-hero-top">
+            
+              
+                  <h2 class="{{ section.heading }}new-hero-heading colored-heading mb-0">{{ section.settings.retail_heading }}</h2>
+
+                
+            
+              
+                  <p class="new-hero-subheading mb-0">
+                    {{ section.settings.retail_sub_heading }}
+                  </p>
+
+                
+            
+              
+                  <p class="new-hero-text mb-0">{{ section.settings.retail_text }}</p>
+              
+            
+          </div>
+
+          <div class="new-hero-bottom">
+
+
+<div class="new-form-area">
+  
+           
+    <h4 class="new-form-heading">{{ section.settings.form-heading }}</h4>
+    
+   {% if section.settings.includeform %} 
+    {%render 'form' %}
+     {% endif %}
+</div>
+
+          </div>
+        </div>
+      </div>
+
+      
+        <div class="col-lg-6 col-12 d-none d-lg-block">
+          <div class="new-hero-img-block">
+            <img class="new-hero-img" src="{{ section.settings.retailsimg | img_url: '' }}" alt="" loading="lazy">
+          </div>
+        </div>
+      
+    </div>
+  </div>
+  {% schema %}
+  {
+    "name":"Retail Section",
+    "settings":[
+      {
+        "type":"image_picker",
+        "id":"retailsimg",
+        "label":"Retail Image"
+      },
+      {
+      "type":"text",
+        "id":"retail_heading",
+        "label":" Heading"
+    },
+      {
+      "type":"text",
+        "id":"retail_sub_heading",
+        "label":" Sub Heading"
+    },
+      {
+      "type":"text",
+        "id":"retail_text",
+        "label":"Text"
+    },
+      
+      {
+        "type":"checkbox",
+        "label":"Form",
+        "id":"includeform"
+                 
+      },
+      {
+         "type":"text",
+        "id":"form-heading",
+        "label":"Form Heading"
+      }
+    ],
+    
+      
+    
+    "presets":[{
+      
+        "name":"Retail Section"
+    }]
+    
+  }
+  {% endschema %}
+  {% stylesheet %}
+ .new-hero-heading {
+    margin: 0;
+   white-space: nowrap;
+}
+{{ section.id }}.new-hero-subheading {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 32px !important;
+    line-height: 1.1;
+    color: #FFFFFF;
+    margin: 0;
+    margin-top: 22px;
+}
+.new-hero-subheading-large {
+    font-family: 'RBNo3.1-Bold';
+    font-weight: 450;
+    font-size: 54px;
+    margin-top: 60px;
+}
+.new-hero-text {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.4;
+    color: #FFFFFF;
+    margin: 0;
+    margin-top: 17px;
+}
+.new-hero-subheading-large + .new-hero-text {
+    margin-top: 19px;
+}
+.new-form-heading {
+    font-family: 'RBNo3.1-Bold';
+    font-weight: 450;
+    font-size: 90px;
+    line-height: 1.1;
+    color: #FFFFFF;
+    margin: 0;
+    margin-top: 95px;
+    
+  
+}
+.new-contact-form {
+    margin-top: 53px;
+  padding-bottom:8px;
+}
+.new-hero-img-block.hero-img-mt {
+    margin-top: 17%;
+}
+
+
+/* responsive */
+@media (min-width: 513px) {
+    .new-hero-heading br {
+        display: none;
+    }
+}
+
+@media (max-width: 1519px) {
+    .new-form-heading br {
+        display: none;
+    }    
+    .new-hero-img-block.hero-img-mt {
+        margin-top: 21%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .new-form-heading {
+        font-size: 74px;
+    }  
+    .new-hero-img-block.hero-img-mt {
+        margin-top: 23%;
+    }
+}
+
+@media (max-width: 1100px) {     
+    .new-hero-img-block.hero-img-mt {
+        margin-top: 29%;
+    }
+}
+
+@media (max-width: 767px) {
+    .new-hero-subheading {        
+        font-size: 22px;
+        margin-top: 14px;
+    }
+    .new-hero-subheading-large {
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 22px;
+        margin-top: 14px;
+    }
+    .new-hero-text {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 1.3;
+        margin-top: 13px;
+    }
+    .new-form-heading {
+        font-size: 54px;
+        margin-top: 51px;
+    }
+    .new-contact-form {
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 512px) {
+    .new-hero-text {
+        max-width: 345px;
+    }
+    .new-hero-heading {
+        padding-top: 5px;
+    }
+}
+
+
+  {% endstylesheet %}

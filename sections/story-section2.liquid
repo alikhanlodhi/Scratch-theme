@@ -1,0 +1,64 @@
+<div class="new-story new_story_{{ section.id }}">
+    <div class="container-fluid">
+        <div class="row img_left flex-row-reverse">
+            <div class="col-lg-6 col-12 col-xs-12 story-col">
+                <div class="story-text-wrapper">
+                    
+                        
+                                <h2 class="story-heading colored-heading mb-0 story-item">{{ section.settings.heading }}</h2>
+                            
+                    
+                        
+                                <p class="story-text mb-0 story-item">{{ section.settings.text }}</p>
+                        
+                    
+                        
+                                <p class="story-text mb-0 story-item">We’ll never stop disrupting the status quo.</p>
+                        
+                    
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-12 col-xs-12 story-col">
+                <div class="story-image-wrapper">
+                    <img class="new-story-img" src="{{ section.settings.image | img_url: '' }}" alt="" loading="lazy">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% schema %}
+  {
+      "name": "Strory-section2",
+        "settings":[
+     {
+       "type":"text",
+       "id":"heading",
+       "label":"heading"
+     },
+     {
+       "type":"text",
+       "id":"text",
+       "label":"Text"
+     },
+     {
+       "type":"image_picker",
+       "id":"image",
+       "label":"Image"
+     }
+   ],
+    "presets": [{
+      "name":"Story-section2"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+    img {
+  max-width: 100%;
+  border: 0; }
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
